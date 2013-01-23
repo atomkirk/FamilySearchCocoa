@@ -1,12 +1,11 @@
 //
-//  FSURL.m
+//  FSClient.m
 //  FamilySearchCocoa
 //
-//  Created by Adam Kirk on 8/28/12.
-//  Copyright (c) 2012 FamilySearch. All rights reserved.
+//  Created by Adam Kirk on 1/23/13.
+//  Copyright (c) 2013 FamilySearch. All rights reserved.
 //
 
-#import "FSURL.h"
 #import "private.h"
 
 
@@ -53,29 +52,13 @@ NSString *queryStringWithParameters(FSQueryParameter parameters)
 
 
 
-
-
-
-@implementation FSURL
-
+@implementation FSClient
 
 static BOOL __sandboxed = YES;
 
 + (void)setSandboxed:(BOOL)sandboxed
 {
 	__sandboxed = sandboxed;
-}
-
-static NSString *__sessionID = nil;
-
-+ (void)setSessionID:(NSString *)sessionID
-{
-    __sessionID = sessionID;
-}
-
-+ (NSString *)sessionID
-{
-    return __sessionID;
 }
 
 + (NSURL *)urlWithModule:(NSString *)module
@@ -98,7 +81,7 @@ static NSString *__sessionID = nil;
 	if (params)		[paramsArray addObject:queryStringWithParameters(params)];
 	if (misc)		[paramsArray addObject:misc];
 
-	if (__sessionID) [paramsArray addObject:[NSString stringWithFormat:@"sessionId=%@", __sessionID]];
+	if ([FSUser currentUser].sessionID) [paramsArray addObject:[NSString stringWithFormat:@"sessionId=%@", [FSUser currentUser].sessionID]];
 	[paramsArray addObject:@"agent=akirk-at-familysearch-dot-org/1.0"];
 	[url appendString:[paramsArray componentsJoinedByString:@"&"]];
 

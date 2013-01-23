@@ -8,14 +8,10 @@
 
 @class MTPocketResponse, FSPerson;
 
+typedef NSString * FSUserGender;
+#define FSUserGenderMale    @"MALE"
+#define FSUserGenderFemail  @"FEMALE"
 
-extern NSString *const FSUserInfoIDKey;
-extern NSString *const FSUserInfoMembershipIDKey;
-extern NSString *const FSUserInfoStakeKey;
-extern NSString *const FSUserInfoTempleDistrictKey;
-extern NSString *const FSUserInfoWardKey;
-extern NSString *const FSUserInfoNameKey;
-extern NSString *const FSUserInfoUsernameKey;
 
 // @YES or @NO
 extern NSString *const FSUserPermissionAccess;
@@ -31,8 +27,19 @@ extern NSString *const FSUserPermissionAccessDiscussionForums;
 
 @interface FSUser : NSObject
 
+@property (readonly)          NSString      *sessionID;
+@property (strong, nonatomic) NSString      *identifier;
+@property (strong, nonatomic) NSString      *displayName;
+@property (strong, nonatomic) NSString      *email;
 @property (strong, nonatomic) NSString      *username;
-@property (strong, nonatomic) NSDictionary  *info;
+@property (strong, nonatomic) NSDate        *birthDate;
+@property (strong, nonatomic) NSString      *country;
+@property (strong, nonatomic) NSString      *familyName;
+@property (strong, nonatomic) FSUserGender  gender;
+@property (strong, nonatomic) NSString      *givenName;
+@property (strong, nonatomic) NSNumber      *membershipNumber;
+@property (strong, nonatomic) NSString      *preferredLanguage;
+@property (strong, nonatomic) NSNumber      *ward;
 @property (strong, nonatomic) NSDictionary  *permissions;
 @property (readonly, getter=isLoggedIn) BOOL loggedIn;
 

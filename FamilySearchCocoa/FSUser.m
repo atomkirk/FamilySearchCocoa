@@ -50,7 +50,7 @@ static FSUser *__currentUser = nil;
 - (MTPocketResponse *)login
 {
     _treePerson = nil;
-    [FSURL setSessionID:nil];
+    _sessionID = nil;
 
 	NSURL *url = [FSURL urlWithModule:@"identity"
                               version:2
@@ -62,10 +62,9 @@ static FSUser *__currentUser = nil;
     MTPocketResponse *response = [MTPocketRequest requestForURL:url method:MTPocketMethodGET format:MTPocketFormatJSON username:_username password:_password body:nil].send;
 
 	if (response.success) {
-        _loggedIn = YES;
-        __currentUser = self;
-		NSString *sessionID = NILL([response.body valueForKeyPath:@"session.id"]);
-        [FSURL setSessionID:sessionID];
+        _loggedIn       = YES;
+        __currentUser   = self;
+		_sessionID      = NILL([response.body valueForKeyPath:@"session.id"]);
 	}
 
 	return response;
@@ -79,26 +78,25 @@ static FSUser *__currentUser = nil;
 
 - (MTPocketResponse *)fetch
 {
-	NSURL *url = [FSURL urlWithModule:@"identity"
-                              version:2
-                             resource:@"user"
-                          identifiers:nil
-                               params:0
-                                 misc:nil];
+    NSString *URLString = [NSString stringWithFormat:@"https://ident.familysearch.org/cis-public-api/v4/user?sessionId=%@", [FSURL sessionID]];
+	NSURL *url = [NSURL URLWithString:URLString];
 
     MTPocketResponse *response = [MTPocketRequest requestForURL:url method:MTPocketMethodGET format:MTPocketFormatJSON body:nil].send;
 
 	if (response.success) {
         NSDictionary *userDict                  = [response.body[@"users"] lastObject];
-        NSMutableDictionary *infoDict           = [NSMutableDictionary dictionary];
-        infoDict[FSUserInfoIDKey]               = userDict[FSUserInfoIDKey];
-        infoDict[FSUserInfoMembershipIDKey]     = [userDict valueForKeyPath:FSUserInfoMembershipIDKey];
-        infoDict[FSUserInfoStakeKey]            = [userDict valueForKeyPath:FSUserInfoStakeKey];
-        infoDict[FSUserInfoTempleDistrictKey]   = [userDict valueForKeyPath:FSUserInfoTempleDistrictKey];
-        infoDict[FSUserInfoWardKey]             = [userDict valueForKeyPath:FSUserInfoWardKey];
-        infoDict[FSUserInfoNameKey]             = [userDict valueForComplexKeyPath:FSUserInfoNameKey];
-        infoDict[FSUserInfoUsernameKey]         = userDict[FSUserInfoUsernameKey];
-        _info                                   = [NSDictionary dictionaryWithDictionary:infoDict];
+        _displayName        = NILL(userDict[@"displayName"]);
+        _email              = NILL(userDict[@"email"]);
+        _identifier         = NILL(userDict[@"id"]);
+        _username           = NILL(userDict[@"username"]);
+        _birthDate          = NILL(userDict[@"birthDate"]);
+        _country            = NILL(userDict[@"country"]);
+        _familyName         = NILL(userDict[@"familyName"]);
+        _gender             = NILL(userDict[@"gender"]);
+        _givenName          = NILL(userDict[@"givenName"]);
+        _membershipNumber   = NILL(userDict[@"membershipNumber"]);
+        _preferredLanguage  = NILL(userDict[@"preferredLanguage"]);
+        _ward               = NILL(userDict[@"ward"]);
 	}
     else return response;
 
@@ -136,11 +134,22 @@ static FSUser *__currentUser = nil;
 	NSURL *url = [FSURL urlWithModule:@"identity" version:2 resource:@"logout" identifiers:nil params:0 misc:nil];
     MTPocketResponse *response = [MTPocketRequest requestForURL:url method:MTPocketMethodGET format:MTPocketFormatJSON body:nil].send;
     if (response.success) {
-        _loggedIn       = NO;
-        _username       = nil;
-        _treePerson     = nil;
-        _info           = nil;
-        _permissions    = nil;
+        _loggedIn           = NO;
+        _username           = nil;
+        _treePerson         = nil;
+        _displayName        = nil;
+        _email              = nil;
+        _identifier         = nil;
+        _username           = nil;
+        _birthDate          = nil;
+        _country            = nil;
+        _familyName         = nil;
+        _gender             = nil;
+        _givenName          = nil;
+        _membershipNumber   = nil;
+        _preferredLanguage  = nil;
+        _ward               = nil;
+        _permissions        = nil;
         [FSURL setSessionID:nil];
     }
     return response;

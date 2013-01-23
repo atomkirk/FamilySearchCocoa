@@ -42,11 +42,21 @@
     STAssertTrue(response.success, nil);
 
     response = [user fetch];
+
     STAssertTrue(response.success, nil);
-    STAssertNotNil(user.info[FSUserInfoNameKey], nil);
-    STAssertNotNil(user.info[FSUserInfoUsernameKey], nil);
-    STAssertNotNil(user.info[FSUserInfoIDKey], nil);
-    STAssertNotNil(user.info[FSUserInfoMembershipIDKey], nil);
+    STAssertNotNil(user.displayName, nil);
+    STAssertNotNil(user.email, nil);
+    STAssertNotNil(user.identifier, nil);
+    STAssertNotNil(user.username, nil);
+    STAssertNotNil(user.birthDate, nil);
+    STAssertNotNil(user.country, nil);
+    STAssertNotNil(user.familyName, nil);
+    STAssertNotNil(user.gender, nil);
+    STAssertNotNil(user.givenName, nil);
+    STAssertNotNil(user.membershipNumber, nil);
+    STAssertNotNil(user.preferredLanguage, nil);
+    STAssertNotNil(user.ward, nil);
+
     STAssertTrue([user.permissions[FSUserPermissionAccess] boolValue], nil);
     STAssertTrue([user.permissions[FSUserPermissionView] boolValue], nil);
     STAssertTrue([user.permissions[FSUserPermissionModify] boolValue], nil);
