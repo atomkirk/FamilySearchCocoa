@@ -1,5 +1,5 @@
 //
-//  FSEvent.h
+//  FSSourceDescription.h
 //  FamilySearchCocoa
 //
 //  Created by Adam Kirk on 1/28/13.
@@ -8,6 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@interface FSEvent : NSObject
+@interface FSSourceDescription : NSObject
 
 @end

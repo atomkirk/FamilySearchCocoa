@@ -10,7 +10,7 @@
 #import <NSDate+MTDates.h>
 #import <NSDateComponents+MTDates.h>
 #import "FSURL.h"
-#import "FSUser.h"
+#import "FSAgent.h"
 #import "FSPerson.h"
 #import "FSEvent.h"
 #import "FSMarriage.h"
@@ -29,7 +29,7 @@
 {
 	[FSURL setSandboxed:YES];
 
-	FSUser *user = [[FSUser alloc] initWithUsername:SANDBOXED_USERNAME password:SANDBOXED_PASSWORD developerKey:SANDBOXED_DEV_KEY];
+	FSAgent *user = [[FSAgent alloc] initWithUsername:SANDBOXED_USERNAME password:SANDBOXED_PASSWORD developerKey:SANDBOXED_DEV_KEY];
 	[user login];
 
 	_person = [FSPerson personWithIdentifier:nil];

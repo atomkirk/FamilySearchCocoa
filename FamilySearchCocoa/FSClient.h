@@ -6,10 +6,10 @@
 //  Copyright (c) 2013 FamilySearch. All rights reserved.
 //
 
-// Media Types
-typedef NSString * FSMediaType;
-#define FSMediaTypeXML          @"application/x-fs-v1+xml"
-#define FSMediaTypeJSON         @"application/x-fs-v1+json"
+//// Media Types
+//typedef NSString * FSMediaType;
+//#define FSMediaTypeXML          @"application/x-fs-v1+xml"
+//#define FSMediaTypeJSON         @"application/x-fs-v1+json"
 
 
 
@@ -21,6 +21,5 @@ typedef NSString * FSMediaType;
 + (MTPocketRequest *)requestToConclusionResource:(NSString *)resource   identifiers:(NSArray *)identifiers  method:(MTPocketMethod)method   body:(id)body   params:(NSDictionary *)params;
 + (MTPocketRequest *)requestToReservationResource:(NSString *)resource  identifiers:(NSArray *)identifiers  method:(MTPocketMethod)method   body:(id)body   params:(NSDictionary *)params;
 + (MTPocketRequest *)requestToArtifactResource:(NSString *)resource                                         method:(MTPocketMethod)method   body:(id)body   params:(NSDictionary *)params;
-
 
 @end

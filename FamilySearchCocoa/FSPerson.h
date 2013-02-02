@@ -16,9 +16,10 @@
 
 #import <MTPocket.h>
 #import "FSOrdinance.h"
-#import "FSEvent.h"
 
-@class FSMarriage, FSOrdinance, FSUser;
+@class FSMarriage, FSOrdinance, FSAgent;
+
+
 
 
 // Person Property
@@ -87,15 +88,15 @@ typedef enum {
 @interface FSPerson : NSObject
 
 @property (readonly)		  NSString	*identifier;
+@property (strong, nonatomic) NSString	*name;                  // @"Adam Kirk"
+@property (strong, nonatomic) NSString	*gender;				// @"Male" or @"Female"
 @property (readonly)		  BOOL		isAlive;				// Default: YES. You must add a death event for the system to return NO. Not editable by user.
 @property (readonly)		  BOOL		isModifiable;			// Can be modified by the current logged in contributor
-@property (readonly)		  BOOL		isSaved;					// Has been created on the client but has not be saved to the server
+@property (readonly)		  BOOL		isSaved;				// Has been created on the client but has not be saved to the server
 @property (readonly)          BOOL      isFetched;              // Has been fetched from the server.
 @property (readonly)		  NSDate	*lastModifiedDate;
 @property (readonly)		  NSArray	*parents;				// Returns array of FSPerson objects
 @property (readonly)		  NSArray	*children;				// Returns array of FSperson objects
-@property (readonly)		  NSArray	*marriages;				// Returns array of FSMarriage objects. See FSMarriage.h for more info.
-@property (readonly)		  NSArray	*events;				// Returns array of FSEvent objects
 @property (readonly)		  NSArray	*ordinances;			// Returns array of FSOrdinance objects. See FSOrdinance.h for more info.
 @property (strong, nonatomic) void (^onChange)(FSPerson *p);	// The passed in block is invoked whenever the person is changed.
 @property (strong, nonatomic) void (^onSync)(FSPerson *p, FSPersonSyncResult result);		// The passed in block is invoked whenever the person synced with the server.
@@ -111,17 +112,6 @@ typedef enum {
 - (MTPocketResponse *)fetch;									// If called when identifier is (not nil => reset w server info)	| (nil => throws an exception)
 - (MTPocketResponse *)save;										// If called when identifier is (not nil => update person)			| (nil => create new person)
 - (MTPocketResponse *)fetchAncestors:(NSUInteger)generations;
-+ (MTPocketResponse *)batchFetchPeople:(NSArray *)people;
-// After setting name, gender and birthlike/deathlike events, you must call save, then fetch, then this
-// in order to save them as the "primary" values for the person. This will not be necessary in a future
-// API, but until then...
-- (MTPocketResponse *)saveSummary;
-
-
-#pragma mark - Properties
-@property (strong, nonatomic) NSString	*name;                  // @"Adam Kirk"
-@property (strong, nonatomic) NSString	*gender;				// @"Male" or @"Female"
-- (NSArray *)loggedValuesForPropertyType:(FSPropertyType)type;
 
 
 #pragma mark - Characteristics
@@ -140,18 +130,6 @@ typedef enum {
 - (void)addChild:(FSPerson *)child withLineage:(FSLineageType)lineage;
 - (void)removeChild:(FSPerson *)child;
 
-
-#pragma mark - Marriages
-- (void)addMarriage:(FSMarriage *)marriage;
-- (void)removeMarriage:(FSMarriage *)marriage;
-- (FSMarriage *)marriageWithSpouse:(FSPerson *)spouse;			// Returns nil if there is no marriage with the spouse
-
-
-#pragma mark - Events
-- (void)addEvent:(FSEvent *)event;
-- (void)removeEvent:(FSEvent *)event;
-- (NSArray *)loggedEventsOfType:(FSPersonEventType)type;
-
 @property (nonatomic, strong) NSDateComponents	*birthDate;		/*  These are for convenience.       */
 @property (nonatomic, strong) NSString			*birthPlace;	/*  Does the same thing as           */
 @property (nonatomic, strong) NSDateComponents	*deathDate;		/*  creating an event and            */
@@ -161,6 +139,7 @@ typedef enum {
 #pragma mark - Misc
 - (NSArray *)duplicatesWithResponse:(MTPocketResponse **)response;		// returns possible duplicates of this person (to potentially be merged)
 - (void)addUnofficialOrdinanceWithType:(FSOrdinanceType)type date:(NSDate *)date templeCode:(NSString *)templeCode;
+- (NSArray *)loggedValuesForPropertyType:(FSPropertyType)type;
 
 
 #pragma mark - Keys

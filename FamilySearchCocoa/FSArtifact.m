@@ -64,18 +64,14 @@
 {
     if (!person || !person.identifier) raiseParamException(@"person");
 
-    NSMutableArray *params = [NSMutableArray array];
-    if (category) [params addObject:[NSString stringWithFormat:@"artifactCategory=%@", category]];
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    if (category) params[@"artifactCategory"] = category;
     // TODO: I've asked cameraon to add 'includeTags' to this call so we can populate the tags
 
-    NSURL *url = [FSURL urlWithModule:@"artifactmanager"
-                              version:0
-                             resource:[NSString stringWithFormat:@"persons/personsByTreePersonId/%@/artifacts", person.identifier]
-                          identifiers:nil
-                               params:0
-                                 misc:[params componentsJoinedByString:@"&"]];
-
-    MTPocketResponse *resp = *response = [MTPocketRequest requestForURL:url method:MTPocketMethodGET format:MTPocketFormatJSON body:nil].send;
+    MTPocketResponse *resp = *response = [[FSClient requestToArtifactResource:[NSString stringWithFormat:@"persons/personsByTreePersonId/%@/artifacts", person.identifier]
+                                                     method:MTPocketMethodGET
+                                                       body:nil
+                                                     params:params] send];
 
     if (resp.success) {
         NSMutableArray *artifactsArray = [NSMutableArray array];

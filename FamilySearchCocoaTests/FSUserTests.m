@@ -7,7 +7,7 @@
 //
 
 #import "FSUserTests.h"
-#import "FSUser.h"
+#import "FSAgent.h"
 #import "FSPerson.h"
 #import "FSURL.h"
 #import "constants.h"
@@ -19,7 +19,7 @@
 {
 	[FSURL setSandboxed:YES];
 	
-	FSUser *user = [[FSUser alloc] initWithUsername:SANDBOXED_USERNAME password:SANDBOXED_PASSWORD developerKey:SANDBOXED_DEV_KEY];
+	FSAgent *user = [[FSAgent alloc] initWithUsername:SANDBOXED_USERNAME password:SANDBOXED_PASSWORD developerKey:SANDBOXED_DEV_KEY];
 	MTPocketResponse *response = [user login];
 
 	STAssertNotNil(response.body, @"sessionID was nil");
@@ -27,7 +27,7 @@
 
 - (void)testLogout
 {
-	FSUser *user = [[FSUser alloc] initWithUsername:SANDBOXED_USERNAME password:SANDBOXED_PASSWORD developerKey:SANDBOXED_DEV_KEY];
+	FSAgent *user = [[FSAgent alloc] initWithUsername:SANDBOXED_USERNAME password:SANDBOXED_PASSWORD developerKey:SANDBOXED_DEV_KEY];
 	MTPocketResponse *response = [user login];
     STAssertTrue(response.success, nil);
 
@@ -37,7 +37,7 @@
 
 - (void)testFetch
 {
-    FSUser *user = [[FSUser alloc] initWithUsername:SANDBOXED_USERNAME password:SANDBOXED_PASSWORD developerKey:SANDBOXED_DEV_KEY];
+    FSAgent *user = [[FSAgent alloc] initWithUsername:SANDBOXED_USERNAME password:SANDBOXED_PASSWORD developerKey:SANDBOXED_DEV_KEY];
     MTPocketResponse *response = [user login];
     STAssertTrue(response.success, nil);
 

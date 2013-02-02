@@ -11,7 +11,7 @@
 #import "FSPerson.h"
 #import "FSArtifact.h"
 #import "constants.h"
-#import "FSUser.h"
+#import "FSAgent.h"
 #import "FSURL.h"
 #import <MF_Base64Additions.h>
 
@@ -28,7 +28,7 @@
 {
 	[FSURL setSandboxed:NO];
 
-    FSUser *user = [[FSUser alloc] initWithUsername:PRODUCTION_USERNAME password:PRODUCTION_PASSWORD developerKey:PRODUCTION_DEV_KEY];
+    FSAgent *user = [[FSAgent alloc] initWithUsername:PRODUCTION_USERNAME password:PRODUCTION_PASSWORD developerKey:PRODUCTION_DEV_KEY];
 	[user login];
 
 	_person = [FSPerson personWithIdentifier:PRODUCTION_PERSON_ID];

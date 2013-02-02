@@ -59,14 +59,7 @@
 		if (person.identifier) [identifiers addObject:person.identifier];
 	}
 
-	NSURL *url = [FSURL urlWithModule:@"reservation"
-							  version:1
-							 resource:@"person"
-						  identifiers:identifiers
-							   params:0
-								 misc:nil];
-
-    MTPocketResponse *response = [MTPocketRequest requestForURL:url method:MTPocketMethodGET format:MTPocketFormatJSON body:nil].send;
+    MTPocketResponse *response = [[FSClient requestToReservationResource:@"person" identifiers:identifiers method:MTPocketMethodGET body:nil params:nil] send];
 
 	if (response.success) {
 
@@ -162,14 +155,7 @@
 
 + (NSArray *)peopleReservedByCurrentUserWithResponse:(MTPocketResponse **)response
 {
-	NSURL *url = [FSURL urlWithModule:@"reservation"
-							  version:1
-							 resource:@"person"
-						  identifiers:nil
-							   params:0
-								 misc:nil];
-
-    MTPocketResponse *resp = [MTPocketRequest requestForURL:url method:MTPocketMethodGET format:MTPocketFormatJSON body:nil].send;
+    MTPocketResponse *resp = [[FSClient requestToReservationResource:@"person" identifiers:nil method:MTPocketMethodGET body:nil params:nil] send];
 
     NSMutableArray *people = [NSMutableArray array];
 	if (resp.success) {
@@ -291,14 +277,7 @@
 	
 	NSDictionary *body = @{ @"persons" : @{ @"person" : personDictionaries } };
 
-	NSURL *url = [FSURL urlWithModule:@"reservation"
-							  version:1
-							 resource:@"person"
-						  identifiers:nil
-							   params:0
-								 misc:nil];
-
-    MTPocketResponse *response = [MTPocketRequest requestForURL:url method:MTPocketMethodPOST format:MTPocketFormatJSON body:body].send;
+    MTPocketResponse *response = [[FSClient requestToReservationResource:@"person" identifiers:nil method:MTPocketMethodPOST body:body params:nil] send];
 
 	return response;
 }
@@ -318,14 +297,7 @@
 	
 	NSDictionary *body = @{ @"persons" : @{ @"person" : personDictionaries } };
 
-	NSURL *url = [FSURL urlWithModule:@"reservation"
-							  version:1
-							 resource:@"person"
-						  identifiers:nil
-							   params:0
-								 misc:@"owner=me"];
-
-    MTPocketResponse *response = [MTPocketRequest requestForURL:url method:MTPocketMethodPOST format:MTPocketFormatJSON body:body].send;
+    MTPocketResponse *response = [[FSClient requestToReservationResource:@"person" identifiers:nil method:MTPocketMethodPOST body:body params:@{@"owner" : @"me"}] send];
 
 	return response;
 }
@@ -397,18 +369,11 @@
 								}
 							};
 
-		NSURL *url = [FSURL urlWithModule:@"reservation"
-								  version:1
-								 resource:@"trip"
-							  identifiers:nil
-								   params:0
-									 misc:nil];
-
-        resp = *response = [MTPocketRequest requestForURL:url method:MTPocketMethodPOST format:MTPocketFormatJSON body:body].send;
+        resp = *response = [[FSClient requestToReservationResource:@"trip" identifiers:nil method:MTPocketMethodPOST body:body params:nil] send];
 
 		if (resp.success) {
 			NSString *identifier = NILL([resp.body valueForComplexKeyPath:@"trips.trip[first].id"]);
-			PDFURL = [FSURL urlWithModule:@"reservation"
+			PDFURL = [FSClient urlWithModule:@"reservation"
                                   version:1
                                  resource:[NSString stringWithFormat:@"trip/%@/pdf", identifier]
                               identifiers:nil

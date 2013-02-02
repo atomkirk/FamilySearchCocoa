@@ -8,7 +8,7 @@
 
 #import "FSPersonTests.h"
 #import "FSURL.h"
-#import "FSUser.h"
+#import "FSAgent.h"
 #import "FSPerson.h"
 #import "FSMarriage.h"
 #import "constants.h"
@@ -27,7 +27,7 @@
 {
 	[FSURL setSandboxed:YES];
 
-	FSUser *user = [[FSUser alloc] initWithUsername:SANDBOXED_USERNAME password:SANDBOXED_PASSWORD developerKey:SANDBOXED_DEV_KEY];
+	FSAgent *user = [[FSAgent alloc] initWithUsername:SANDBOXED_USERNAME password:SANDBOXED_PASSWORD developerKey:SANDBOXED_DEV_KEY];
 	[user login];
 
 	_person = [FSPerson personWithIdentifier:nil];
@@ -41,7 +41,7 @@
 {
 	[FSURL setSandboxed:NO];
 
-	FSUser *user = [[FSUser alloc] initWithUsername:PRODUCTION_USERNAME password:PRODUCTION_PASSWORD developerKey:PRODUCTION_DEV_KEY];
+	FSAgent *user = [[FSAgent alloc] initWithUsername:PRODUCTION_USERNAME password:PRODUCTION_PASSWORD developerKey:PRODUCTION_DEV_KEY];
     [user login];
 
 	_person = [FSPerson personWithIdentifier:@"KPQH-N6L"]; // Don Kirk, my real grandpa
@@ -60,7 +60,7 @@
 
 	}
 
-    FSUser *user = [[FSUser alloc] initWithUsername:SANDBOXED_USERNAME password:SANDBOXED_PASSWORD developerKey:SANDBOXED_DEV_KEY];
+    FSAgent *user = [[FSAgent alloc] initWithUsername:SANDBOXED_USERNAME password:SANDBOXED_PASSWORD developerKey:SANDBOXED_DEV_KEY];
 	[user login];
     FSPerson *me = [user treePerson];
 

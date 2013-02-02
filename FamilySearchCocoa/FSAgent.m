@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 FamilySearch.org. All rights reserved.
 //
 
-#import "FSUser.h"
+#import "FSAgent.h"
 #import "private.h"
 #import <NSObject+MTJSONUtils.h>
 
@@ -14,7 +14,7 @@
 
 
 
-@interface FSUser ()
+@interface FSAgent ()
 @property (strong, nonatomic) NSString *password;
 @property (strong, nonatomic) NSString *devKey;
 @property (strong, nonatomic) FSPerson *treePerson;
@@ -26,11 +26,11 @@
 
 
 
-@implementation FSUser
+@implementation FSAgent
 
-static FSUser *__currentUser = nil;
+static FSAgent *__currentUser = nil;
 
-+ (FSUser *)currentUser
++ (FSAgent *)currentUser
 {
     return __currentUser;
 }
@@ -52,14 +52,7 @@ static FSUser *__currentUser = nil;
     _treePerson = nil;
     _sessionID = nil;
 
-	NSURL *url = [FSURL urlWithModule:@"identity"
-                              version:2
-                             resource:@"login"
-                          identifiers:nil
-                               params:0
-                                 misc:[NSString stringWithFormat:@"key=%@", _devKey]];
-
-    MTPocketResponse *response = [MTPocketRequest requestForURL:url method:MTPocketMethodGET format:MTPocketFormatJSON username:_username password:_password body:nil].send;
+    MTPocketResponse *response = [[FSClient requestToIdentityResource:@"login" method:MTPocketMethodGET body:nil params:@{@"key" : _devKey}] send];
 
 	if (response.success) {
         _loggedIn       = YES;
@@ -78,37 +71,29 @@ static FSUser *__currentUser = nil;
 
 - (MTPocketResponse *)fetch
 {
-    NSString *URLString = [NSString stringWithFormat:@"https://ident.familysearch.org/cis-public-api/v4/user?sessionId=%@", [FSURL sessionID]];
+    NSString *URLString = [NSString stringWithFormat:@"https://ident.familysearch.org/cis-public-api/v4/user?sessionId=%@", _sessionID];
 	NSURL *url = [NSURL URLWithString:URLString];
 
-    MTPocketResponse *response = [MTPocketRequest requestForURL:url method:MTPocketMethodGET format:MTPocketFormatJSON body:nil].send;
+    MTPocketResponse *response = [[MTPocketRequest requestForURL:url method:MTPocketMethodGET format:MTPocketFormatJSON body:nil] send];
 
 	if (response.success) {
-        NSDictionary *userDict                  = [response.body[@"users"] lastObject];
-        _displayName        = NILL(userDict[@"displayName"]);
-        _email              = NILL(userDict[@"email"]);
-        _identifier         = NILL(userDict[@"id"]);
-        _username           = NILL(userDict[@"username"]);
-        _birthDate          = NILL(userDict[@"birthDate"]);
-        _country            = NILL(userDict[@"country"]);
-        _familyName         = NILL(userDict[@"familyName"]);
-        _gender             = NILL(userDict[@"gender"]);
-        _givenName          = NILL(userDict[@"givenName"]);
-        _membershipNumber   = NILL(userDict[@"membershipNumber"]);
-        _preferredLanguage  = NILL(userDict[@"preferredLanguage"]);
-        _ward               = NILL(userDict[@"ward"]);
+        NSDictionary *userDict  = [response.body[@"users"] lastObject];
+        _displayName            = NILL(userDict[@"displayName"]);
+        _email                  = NILL(userDict[@"email"]);
+        _identifier             = NILL(userDict[@"id"]);
+        _username               = NILL(userDict[@"username"]);
+        _birthDate              = NILL(userDict[@"birthDate"]);
+        _country                = NILL(userDict[@"country"]);
+        _familyName             = NILL(userDict[@"familyName"]);
+        _gender                 = NILL(userDict[@"gender"]);
+        _givenName              = NILL(userDict[@"givenName"]);
+        _membershipNumber       = NILL(userDict[@"membershipNumber"]);
+        _preferredLanguage      = NILL(userDict[@"preferredLanguage"]);
+        _ward                   = NILL(userDict[@"ward"]);
 	}
     else return response;
 
-
-	url = [FSURL urlWithModule:@"identity"
-                       version:2
-                      resource:@"permission"
-                   identifiers:nil
-                        params:0
-                          misc:@"product=FamilyTree"];
-
-    response = [MTPocketRequest requestForURL:url method:MTPocketMethodGET format:MTPocketFormatJSON body:nil].send;
+    response = [[FSClient requestToIdentityResource:@"permission" method:MTPocketMethodGET body:nil params:@{@"product" : @"FamilyTree"}] send];
 
 	if (response.success) {
         NSArray *permissions = response.body[@"permissions"];
@@ -131,8 +116,8 @@ static FSUser *__currentUser = nil;
 
 - (MTPocketResponse *)logout
 {
-	NSURL *url = [FSURL urlWithModule:@"identity" version:2 resource:@"logout" identifiers:nil params:0 misc:nil];
-    MTPocketResponse *response = [MTPocketRequest requestForURL:url method:MTPocketMethodGET format:MTPocketFormatJSON body:nil].send;
+    MTPocketResponse *response = [[FSClient requestToIdentityResource:@"logout" method:MTPocketMethodGET body:nil params:nil] send];
+
     if (response.success) {
         _loggedIn           = NO;
         _username           = nil;
@@ -150,7 +135,7 @@ static FSUser *__currentUser = nil;
         _preferredLanguage  = nil;
         _ward               = nil;
         _permissions        = nil;
-        [FSURL setSessionID:nil];
+        _sessionID          = nil;
     }
     return response;
 }

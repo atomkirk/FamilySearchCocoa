@@ -7,7 +7,7 @@
 //
 
 #import "FSPerson.h"
-#import "FSUser.h"
+#import "FSAgent.h"
 #import "FSMarriage.h"
 #import "FSEvent.h"
 #import "FSOrdinance.h"
@@ -17,6 +17,7 @@
 
 
 #define DATE_FORMAT @"dd MMM yyyy"
+#define GEDCOM_PREFIX(s) [NSString stringWithFormat:@"http://gedcomx.org/%@", s]
 
 
 
@@ -91,14 +92,12 @@ typedef enum {
 FSQueryParameter defaultQueryParameters();
 FSQueryParameter familyQueryParameters();
 
-@interface FSURL ()
-+ (void)setSessionID:(NSString *)sessionID;
+@interface FSClient ()
 + (NSURL *)urlWithModule:(NSString *)module
 				 version:(NSUInteger)version
 				resource:(NSString *)resource
 			 identifiers:(NSArray *)identifiers
-				  params:(FSQueryParameter)params
-					misc:(NSString *)misc;
+				  params:(FSQueryParameter)params;
 @end
 
 

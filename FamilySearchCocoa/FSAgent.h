@@ -25,7 +25,7 @@ extern NSString *const FSUserPermissionAccessDiscussionForums;
 
 
 
-@interface FSUser : NSObject
+@interface FSAgent : NSObject
 
 @property (readonly)          NSString      *sessionID;
 @property (strong, nonatomic) NSString      *identifier;
@@ -45,7 +45,7 @@ extern NSString *const FSUserPermissionAccessDiscussionForums;
 
 - (id)initWithUsername:(NSString *)username password:(NSString *)password developerKey:(NSString *)devKey;
 - (MTPocketResponse *)login;
-+ (FSUser *)currentUser;            // You have to log in first before this is not nil.
++ (FSAgent *)currentUser;            // You have to log in first before this is not nil.
 - (MTPocketResponse *)fetch;
 - (FSPerson *)treePerson;
 - (MTPocketResponse *)logout;

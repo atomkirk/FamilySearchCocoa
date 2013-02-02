@@ -8,11 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		BA531EB170B54EFCBFC52A13 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CE02C144AAA4DCF9A89ABBA /* libPods.a */; };
-		C2058CDC15EC168B0040F234 /* FSMarriage.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C2D9E85B15E41F1D00107376 /* FSMarriage.h */; };
 		C2058CDE15EC168F0040F234 /* FSOrdinance.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C2D9E85F15E41F6200107376 /* FSOrdinance.h */; };
 		C2058CE015EC169A0040F234 /* private.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C2D9E87015E56B0B00107376 /* private.h */; };
-		C2058CE115EC169F0040F234 /* FSEvent.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C2D9E85615E41EF800107376 /* FSEvent.h */; };
-		C232766915D585C7004EDE08 /* FSUser.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C2ABA7B715D5744F000A34A1 /* FSUser.h */; };
+		C232766915D585C7004EDE08 /* FSAgent.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C2ABA7B715D5744F000A34A1 /* FSAgent.h */; };
 		C232766A15D585C7004EDE08 /* FSPerson.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C2ABA7B915D5744F000A34A1 /* FSPerson.h */; };
 		C23E813A15FE87C300A92A44 /* FSOrdinanceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C23E813915FE87C300A92A44 /* FSOrdinanceTests.m */; };
 		C2626EF716663F48001AD7BB /* FSArtifactTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C2626EF616663F48001AD7BB /* FSArtifactTests.m */; };
@@ -20,21 +18,24 @@
 		C2626F0216664045001AD7BB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2626F0016664035001AD7BB /* CoreGraphics.framework */; };
 		C2626F031666404E001AD7BB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2626F0016664035001AD7BB /* CoreGraphics.framework */; };
 		C2626F0516664BFC001AD7BB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2626F0416664BFC001AD7BB /* UIKit.framework */; };
-		C26EEDB015E7D90E00C7714F /* FSMarriageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C26EEDAF15E7D90E00C7714F /* FSMarriageTests.m */; };
-		C27BC94815E69B9B00D7E01F /* FSEventTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C27BC94715E69B9B00D7E01F /* FSEventTests.m */; };
+		C271D60116B730C400E7CA16 /* FSRelationship.m in Sources */ = {isa = PBXBuildFile; fileRef = C271D60016B730C400E7CA16 /* FSRelationship.m */; };
+		C271D60B16B7318800E7CA16 /* FSEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = C271D60A16B7318800E7CA16 /* FSEvent.m */; };
+		C271D61216B7342100E7CA16 /* FSSourceDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = C271D61116B7342100E7CA16 /* FSSourceDescription.m */; };
+		C271D61516B7345D00E7CA16 /* FSDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = C271D61416B7345D00E7CA16 /* FSDocument.m */; };
+		C271D61916B7349900E7CA16 /* PlaceDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = C271D61816B7349900E7CA16 /* PlaceDescription.m */; };
+		C271D61C16B7350000E7CA16 /* FSIdentifier.m in Sources */ = {isa = PBXBuildFile; fileRef = C271D61B16B7350000E7CA16 /* FSIdentifier.m */; };
+		C271D61F16B7351300E7CA16 /* FSAttribution.m in Sources */ = {isa = PBXBuildFile; fileRef = C271D61E16B7351300E7CA16 /* FSAttribution.m */; };
+		C271D62216B7357D00E7CA16 /* FSNote.m in Sources */ = {isa = PBXBuildFile; fileRef = C271D62116B7357D00E7CA16 /* FSNote.m */; };
 		C291B7D8166D09DA0076F2E3 /* arthur-young.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C291B7D6166D09DA0076F2E3 /* arthur-young.jpg */; };
 		C299D8B516B08C730072A315 /* FSClient.m in Sources */ = {isa = PBXBuildFile; fileRef = C299D8B416B08C730072A315 /* FSClient.m */; };
 		C2ABA78315D573EF000A34A1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2ABA78215D573EF000A34A1 /* Foundation.framework */; };
 		C2ABA79215D573EF000A34A1 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2ABA79115D573EF000A34A1 /* SenTestingKit.framework */; };
 		C2ABA79515D573EF000A34A1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2ABA78215D573EF000A34A1 /* Foundation.framework */; };
 		C2ABA79815D573EF000A34A1 /* libFamilySearchCocoa.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C2ABA77F15D573EF000A34A1 /* libFamilySearchCocoa.a */; };
-		C2ABA7BB15D5744F000A34A1 /* FSUser.m in Sources */ = {isa = PBXBuildFile; fileRef = C2ABA7B815D5744F000A34A1 /* FSUser.m */; };
+		C2ABA7BB15D5744F000A34A1 /* FSAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = C2ABA7B815D5744F000A34A1 /* FSAgent.m */; };
 		C2ABA7BD15D5744F000A34A1 /* FSPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = C2ABA7BA15D5744F000A34A1 /* FSPerson.m */; };
 		C2ABA7C815D5746B000A34A1 /* FSPersonTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C2ABA7C215D5745B000A34A1 /* FSPersonTests.m */; };
 		C2ABA7C915D57471000A34A1 /* FSUserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C2ABA7C015D5745B000A34A1 /* FSUserTests.m */; };
-		C2C23DD316446A6800971B0F /* FSBugFixes.m in Sources */ = {isa = PBXBuildFile; fileRef = C2C23DD216446A6800971B0F /* FSBugFixes.m */; };
-		C2D9E85815E41EF800107376 /* FSEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = C2D9E85715E41EF800107376 /* FSEvent.m */; };
-		C2D9E85D15E41F1D00107376 /* FSMarriage.m in Sources */ = {isa = PBXBuildFile; fileRef = C2D9E85C15E41F1D00107376 /* FSMarriage.m */; };
 		C2D9E86115E41F6200107376 /* FSOrdinance.m in Sources */ = {isa = PBXBuildFile; fileRef = C2D9E86015E41F6200107376 /* FSOrdinance.m */; };
 		C2E850FD15F90DE10027C027 /* FSSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = C2E850FC15F90DE10027C027 /* FSSearch.m */; };
 		C2E8510115F922100027C027 /* FSSearchTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C2E8510015F922100027C027 /* FSSearchTests.m */; };
@@ -57,11 +58,9 @@
 			dstPath = "include/${PRODUCT_NAME}";
 			dstSubfolderSpec = 16;
 			files = (
-				C2058CE115EC169F0040F234 /* FSEvent.h in CopyFiles */,
 				C2058CE015EC169A0040F234 /* private.h in CopyFiles */,
 				C2058CDE15EC168F0040F234 /* FSOrdinance.h in CopyFiles */,
-				C2058CDC15EC168B0040F234 /* FSMarriage.h in CopyFiles */,
-				C232766915D585C7004EDE08 /* FSUser.h in CopyFiles */,
+				C232766915D585C7004EDE08 /* FSAgent.h in CopyFiles */,
 				C232766A15D585C7004EDE08 /* FSPerson.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -82,10 +81,22 @@
 		C2626EFA16663F5F001AD7BB /* FSArtifact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSArtifact.m; sourceTree = "<group>"; };
 		C2626F0016664035001AD7BB /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		C2626F0416664BFC001AD7BB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		C26EEDAE15E7D90E00C7714F /* FSMarriageTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSMarriageTests.h; sourceTree = "<group>"; };
-		C26EEDAF15E7D90E00C7714F /* FSMarriageTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSMarriageTests.m; sourceTree = "<group>"; };
-		C27BC94615E69B9B00D7E01F /* FSEventTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSEventTests.h; sourceTree = "<group>"; };
-		C27BC94715E69B9B00D7E01F /* FSEventTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSEventTests.m; sourceTree = "<group>"; };
+		C271D5FF16B730C400E7CA16 /* FSRelationship.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSRelationship.h; sourceTree = "<group>"; };
+		C271D60016B730C400E7CA16 /* FSRelationship.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSRelationship.m; sourceTree = "<group>"; };
+		C271D60916B7318800E7CA16 /* FSEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSEvent.h; sourceTree = "<group>"; };
+		C271D60A16B7318800E7CA16 /* FSEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSEvent.m; sourceTree = "<group>"; };
+		C271D61016B7342100E7CA16 /* FSSourceDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSSourceDescription.h; sourceTree = "<group>"; };
+		C271D61116B7342100E7CA16 /* FSSourceDescription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSSourceDescription.m; sourceTree = "<group>"; };
+		C271D61316B7345D00E7CA16 /* FSDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSDocument.h; sourceTree = "<group>"; };
+		C271D61416B7345D00E7CA16 /* FSDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSDocument.m; sourceTree = "<group>"; };
+		C271D61716B7349900E7CA16 /* PlaceDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaceDescription.h; sourceTree = "<group>"; };
+		C271D61816B7349900E7CA16 /* PlaceDescription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaceDescription.m; sourceTree = "<group>"; };
+		C271D61A16B7350000E7CA16 /* FSIdentifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSIdentifier.h; sourceTree = "<group>"; };
+		C271D61B16B7350000E7CA16 /* FSIdentifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSIdentifier.m; sourceTree = "<group>"; };
+		C271D61D16B7351300E7CA16 /* FSAttribution.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSAttribution.h; sourceTree = "<group>"; };
+		C271D61E16B7351300E7CA16 /* FSAttribution.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSAttribution.m; sourceTree = "<group>"; };
+		C271D62016B7357D00E7CA16 /* FSNote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSNote.h; sourceTree = "<group>"; };
+		C271D62116B7357D00E7CA16 /* FSNote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSNote.m; sourceTree = "<group>"; };
 		C291B7D7166D09DA0076F2E3 /* en */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = en; path = "arthur-young.jpg"; sourceTree = "<group>"; };
 		C299D8B316B08C730072A315 /* FSClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSClient.h; sourceTree = "<group>"; };
 		C299D8B416B08C730072A315 /* FSClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSClient.m; sourceTree = "<group>"; };
@@ -93,8 +104,8 @@
 		C2ABA78215D573EF000A34A1 /* Foundation.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C2ABA79015D573EF000A34A1 /* FamilySearchCocoaTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FamilySearchCocoaTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2ABA79115D573EF000A34A1 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		C2ABA7B715D5744F000A34A1 /* FSUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSUser.h; sourceTree = "<group>"; };
-		C2ABA7B815D5744F000A34A1 /* FSUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSUser.m; sourceTree = "<group>"; };
+		C2ABA7B715D5744F000A34A1 /* FSAgent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSAgent.h; sourceTree = "<group>"; };
+		C2ABA7B815D5744F000A34A1 /* FSAgent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSAgent.m; sourceTree = "<group>"; };
 		C2ABA7B915D5744F000A34A1 /* FSPerson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSPerson.h; sourceTree = "<group>"; };
 		C2ABA7BA15D5744F000A34A1 /* FSPerson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSPerson.m; sourceTree = "<group>"; };
 		C2ABA7BF15D5745B000A34A1 /* FSUserTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSUserTests.h; sourceTree = "<group>"; };
@@ -102,12 +113,6 @@
 		C2ABA7C115D5745B000A34A1 /* FSPersonTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSPersonTests.h; sourceTree = "<group>"; };
 		C2ABA7C215D5745B000A34A1 /* FSPersonTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSPersonTests.m; sourceTree = "<group>"; };
 		C2ABA7C315D5745B000A34A1 /* constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = constants.h; sourceTree = "<group>"; };
-		C2C23DD116446A6800971B0F /* FSBugFixes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSBugFixes.h; sourceTree = "<group>"; };
-		C2C23DD216446A6800971B0F /* FSBugFixes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSBugFixes.m; sourceTree = "<group>"; };
-		C2D9E85615E41EF800107376 /* FSEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSEvent.h; sourceTree = "<group>"; };
-		C2D9E85715E41EF800107376 /* FSEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSEvent.m; sourceTree = "<group>"; };
-		C2D9E85B15E41F1D00107376 /* FSMarriage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSMarriage.h; sourceTree = "<group>"; };
-		C2D9E85C15E41F1D00107376 /* FSMarriage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSMarriage.m; sourceTree = "<group>"; };
 		C2D9E85F15E41F6200107376 /* FSOrdinance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSOrdinance.h; sourceTree = "<group>"; };
 		C2D9E86015E41F6200107376 /* FSOrdinance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSOrdinance.m; sourceTree = "<group>"; };
 		C2D9E87015E56B0B00107376 /* private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = private.h; sourceTree = "<group>"; };
@@ -162,6 +167,69 @@
 			path = en.lproj;
 			sourceTree = "<group>";
 		};
+		C271D60316B730CE00E7CA16 /* Conclusion */ = {
+			isa = PBXGroup;
+			children = (
+				C2E850FB15F90DE10027C027 /* FSSearch.h */,
+				C2E850FC15F90DE10027C027 /* FSSearch.m */,
+				C271D60F16B733F400E7CA16 /* Primary */,
+				C271D61616B7346100E7CA16 /* Component */,
+			);
+			name = Conclusion;
+			sourceTree = "<group>";
+		};
+		C271D60416B730DE00E7CA16 /* Ordinances */ = {
+			isa = PBXGroup;
+			children = (
+				C2D9E85F15E41F6200107376 /* FSOrdinance.h */,
+				C2D9E86015E41F6200107376 /* FSOrdinance.m */,
+			);
+			name = Ordinances;
+			sourceTree = "<group>";
+		};
+		C271D60516B730F700E7CA16 /* Artifacts */ = {
+			isa = PBXGroup;
+			children = (
+				C2626EF916663F5F001AD7BB /* FSArtifact.h */,
+				C2626EFA16663F5F001AD7BB /* FSArtifact.m */,
+			);
+			name = Artifacts;
+			sourceTree = "<group>";
+		};
+		C271D60F16B733F400E7CA16 /* Primary */ = {
+			isa = PBXGroup;
+			children = (
+				C2ABA7B715D5744F000A34A1 /* FSAgent.h */,
+				C2ABA7B815D5744F000A34A1 /* FSAgent.m */,
+				C2ABA7B915D5744F000A34A1 /* FSPerson.h */,
+				C2ABA7BA15D5744F000A34A1 /* FSPerson.m */,
+				C271D5FF16B730C400E7CA16 /* FSRelationship.h */,
+				C271D60016B730C400E7CA16 /* FSRelationship.m */,
+				C271D60916B7318800E7CA16 /* FSEvent.h */,
+				C271D60A16B7318800E7CA16 /* FSEvent.m */,
+				C271D61016B7342100E7CA16 /* FSSourceDescription.h */,
+				C271D61116B7342100E7CA16 /* FSSourceDescription.m */,
+				C271D61316B7345D00E7CA16 /* FSDocument.h */,
+				C271D61416B7345D00E7CA16 /* FSDocument.m */,
+				C271D61716B7349900E7CA16 /* PlaceDescription.h */,
+				C271D61816B7349900E7CA16 /* PlaceDescription.m */,
+			);
+			name = Primary;
+			sourceTree = "<group>";
+		};
+		C271D61616B7346100E7CA16 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				C271D61A16B7350000E7CA16 /* FSIdentifier.h */,
+				C271D61B16B7350000E7CA16 /* FSIdentifier.m */,
+				C271D61D16B7351300E7CA16 /* FSAttribution.h */,
+				C271D61E16B7351300E7CA16 /* FSAttribution.m */,
+				C271D62016B7357D00E7CA16 /* FSNote.h */,
+				C271D62116B7357D00E7CA16 /* FSNote.m */,
+			);
+			name = Component;
+			sourceTree = "<group>";
+		};
 		C299D8B116B08C560072A315 /* private */ = {
 			isa = PBXGroup;
 			children = (
@@ -208,20 +276,9 @@
 			isa = PBXGroup;
 			children = (
 				C2F7728415FFCFFC00942268 /* FamilySearchCocoa.h */,
-				C2ABA7B715D5744F000A34A1 /* FSUser.h */,
-				C2ABA7B815D5744F000A34A1 /* FSUser.m */,
-				C2ABA7B915D5744F000A34A1 /* FSPerson.h */,
-				C2ABA7BA15D5744F000A34A1 /* FSPerson.m */,
-				C2D9E85615E41EF800107376 /* FSEvent.h */,
-				C2D9E85715E41EF800107376 /* FSEvent.m */,
-				C2D9E85B15E41F1D00107376 /* FSMarriage.h */,
-				C2D9E85C15E41F1D00107376 /* FSMarriage.m */,
-				C2D9E85F15E41F6200107376 /* FSOrdinance.h */,
-				C2D9E86015E41F6200107376 /* FSOrdinance.m */,
-				C2E850FB15F90DE10027C027 /* FSSearch.h */,
-				C2E850FC15F90DE10027C027 /* FSSearch.m */,
-				C2626EF916663F5F001AD7BB /* FSArtifact.h */,
-				C2626EFA16663F5F001AD7BB /* FSArtifact.m */,
+				C271D60316B730CE00E7CA16 /* Conclusion */,
+				C271D60416B730DE00E7CA16 /* Ordinances */,
+				C271D60516B730F700E7CA16 /* Artifacts */,
 				C299D8B116B08C560072A315 /* private */,
 				C2ABA78515D573EF000A34A1 /* Supporting Files */,
 			);
@@ -243,18 +300,12 @@
 				C2ABA7C015D5745B000A34A1 /* FSUserTests.m */,
 				C2ABA7C115D5745B000A34A1 /* FSPersonTests.h */,
 				C2ABA7C215D5745B000A34A1 /* FSPersonTests.m */,
-				C27BC94615E69B9B00D7E01F /* FSEventTests.h */,
-				C27BC94715E69B9B00D7E01F /* FSEventTests.m */,
-				C26EEDAE15E7D90E00C7714F /* FSMarriageTests.h */,
-				C26EEDAF15E7D90E00C7714F /* FSMarriageTests.m */,
 				C23E813815FE87C300A92A44 /* FSOrdinanceTests.h */,
 				C23E813915FE87C300A92A44 /* FSOrdinanceTests.m */,
 				C2E850FF15F922100027C027 /* FSSearchTests.h */,
 				C2E8510015F922100027C027 /* FSSearchTests.m */,
 				C2626EF516663F48001AD7BB /* FSArtifactTests.h */,
 				C2626EF616663F48001AD7BB /* FSArtifactTests.m */,
-				C2C23DD116446A6800971B0F /* FSBugFixes.h */,
-				C2C23DD216446A6800971B0F /* FSBugFixes.m */,
 				C2ABA7C315D5745B000A34A1 /* constants.h */,
 				C23276DF15D58EF3004EDE08 /* Supporting Files */,
 			);
@@ -374,14 +425,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C2ABA7BB15D5744F000A34A1 /* FSUser.m in Sources */,
+				C2ABA7BB15D5744F000A34A1 /* FSAgent.m in Sources */,
 				C2ABA7BD15D5744F000A34A1 /* FSPerson.m in Sources */,
-				C2D9E85815E41EF800107376 /* FSEvent.m in Sources */,
-				C2D9E85D15E41F1D00107376 /* FSMarriage.m in Sources */,
 				C2D9E86115E41F6200107376 /* FSOrdinance.m in Sources */,
 				C2E850FD15F90DE10027C027 /* FSSearch.m in Sources */,
 				C2626EFB16663F5F001AD7BB /* FSArtifact.m in Sources */,
 				C299D8B516B08C730072A315 /* FSClient.m in Sources */,
+				C271D60116B730C400E7CA16 /* FSRelationship.m in Sources */,
+				C271D60B16B7318800E7CA16 /* FSEvent.m in Sources */,
+				C271D61216B7342100E7CA16 /* FSSourceDescription.m in Sources */,
+				C271D61516B7345D00E7CA16 /* FSDocument.m in Sources */,
+				C271D61916B7349900E7CA16 /* PlaceDescription.m in Sources */,
+				C271D61C16B7350000E7CA16 /* FSIdentifier.m in Sources */,
+				C271D61F16B7351300E7CA16 /* FSAttribution.m in Sources */,
+				C271D62216B7357D00E7CA16 /* FSNote.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -391,11 +448,8 @@
 			files = (
 				C2ABA7C815D5746B000A34A1 /* FSPersonTests.m in Sources */,
 				C2ABA7C915D57471000A34A1 /* FSUserTests.m in Sources */,
-				C27BC94815E69B9B00D7E01F /* FSEventTests.m in Sources */,
-				C26EEDB015E7D90E00C7714F /* FSMarriageTests.m in Sources */,
 				C2E8510115F922100027C027 /* FSSearchTests.m in Sources */,
 				C23E813A15FE87C300A92A44 /* FSOrdinanceTests.m in Sources */,
-				C2C23DD316446A6800971B0F /* FSBugFixes.m in Sources */,
 				C2626EF716663F48001AD7BB /* FSArtifactTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

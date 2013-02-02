@@ -129,34 +129,26 @@
 	if (!self.gender	|| [self.gender isEqualToString:@""])	raiseException(@"Nil 'gender'", @"You cannot save a person until you set their gender property.");
 
 
-	NSMutableDictionary *assertions = [NSMutableDictionary dictionary];
+	NSMutableDictionary *keys = [NSMutableDictionary dictionary];
 
 
 	// NAME
 	if (self.name) {
 		NSDictionary *nameDict = @{
 								@"names" : @[ @{
-									@"value" : @{
-										@"forms" : @[ @{
-											@"fullText" : self.name
-										}]
-									}
+                                    @"type" : GEDCOM_PREFIX(@"BirthName"),
+                                    @"nameForms" : @[ @{
+                                        @"fullText" : self.name
+                                    }]
 								}]
 							};
-		[assertions addEntriesFromDictionary:nameDict];
+		[keys addEntriesFromDictionary:nameDict];
 	}
 
 
 	// GENDER
 	if (self.gender) {
-		NSDictionary *genderDict = @{
-									@"genders" : @[ @{
-										@"value" : @{
-											@"type" : self.gender
-										}
-									}]
-								};
-		[assertions addEntriesFromDictionary:genderDict];
+        keys[@"gender"] = GEDCOM_PREFIX(self.gender);
 	}
 	
 
@@ -170,7 +162,7 @@
 		if (characteristic.value) characteristicDict[@"detail"] = characteristic.value;
 		[characteristics addObject: @{ @"value" : characteristicDict } ];
 	}
-	[assertions addEntriesFromDictionary: @{ @"characteristics" : characteristics } ];
+	[keys addEntriesFromDictionary: @{ @"characteristics" : characteristics } ];
 
 
 	// EVENTS
@@ -194,7 +186,7 @@
 			}
 		}
 	}
-	if (events.count > 0) [assertions addEntriesFromDictionary: @{ @"events" : events } ];
+	if (events.count > 0) [keys addEntriesFromDictionary: @{ @"events" : events } ];
 
 	// ORDINANCES
 	NSMutableArray *ordinances = [NSMutableArray array];
@@ -209,7 +201,7 @@
 			[ordinances addObject: @{ @"value" : ordinanceInfo } ];
 		}
 	}
-	if (ordinances.count > 0) [assertions addEntriesFromDictionary: @{ @"ordinances" : ordinances } ];
+	if (ordinances.count > 0) [keys addEntriesFromDictionary: @{ @"ordinances" : ordinances } ];
 
 	// SAVE
 	NSURL *url = [FSURL urlWithModule:@"familytree"
@@ -222,7 +214,7 @@
 	NSMutableDictionary *personDict = [NSMutableDictionary dictionary];
 	if (_identifier)				personDict[@"id"] = _identifier;
     if (_version)                   personDict[@"version"] = _version;
-	if (assertions.count > 0)		personDict[@"assertions"] = assertions;
+	if (keys.count > 0)		personDict[@"assertions"] = keys;
 
 	NSDictionary *body = @{ @"persons" : @[ personDict ] };
     MTPocketResponse *response = [MTPocketRequest requestForURL:url method:MTPocketMethodPOST format:MTPocketFormatJSON body:body].send;
