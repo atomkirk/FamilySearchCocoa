@@ -1,0 +1,6 @@
+[submodule "libs/MTPocket"]
+	path = libs/MTPocket
+	url = https://github.com/mysterioustrousers/MTPocket.git
+[submodule "libs/MTDates"]
+	path = libs/MTDates
+	url = https://github.com/mysterioustrousers/MTDates.git

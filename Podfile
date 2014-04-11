@@ -1,5 +1,4 @@
 platform :ios, '5.1'
 
-pod 'MTPocket'
-pod 'MTDates'
-pod 'MTJSONUtils'
+pod 'MTPocket', path: "libs/MTPocket"
+pod 'MTDates',  path: "libs/MTDates"

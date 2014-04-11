@@ -8,17 +8,20 @@
 
 #import "FSPerson.h"
 #import "FSAgent.h"
-#import "FSMarriage.h"
 #import "FSEvent.h"
 #import "FSOrdinance.h"
 #import "FSArtifact.h"
 #import "FSClient.h"
-#import <NSObject+MTJSONUtils.h>
 
 
 #define DATE_FORMAT @"dd MMM yyyy"
 #define GEDCOM_PREFIX(s) [NSString stringWithFormat:@"http://gedcomx.org/%@", s]
 
+// swaps NSNull with nil
+#define NILL(a) ([a isKindOfClass:[NSNull class]] ? nil : a)
+
+// swaps nil with NSNull
+#define NUL(a) (a ? a : [NSNull null])
 
 
 
@@ -112,16 +115,6 @@ FSQueryParameter familyQueryParameters();
 - (BOOL)isSamePerson:(FSPerson *)person;
 @end
 
-
-
-
-@interface FSMarriage ()
-@property (strong, nonatomic)	NSMutableDictionary	*characteristics;
-@property (nonatomic)			NSInteger			version;
-@property (getter = isChanged)	BOOL				changed;	// is newly created or updated and needs to be updated on the server
-@property (getter = isDeleted)	BOOL				deleted;	// has been deleted and needs to be deleted from the server
-- (MTPocketResponse *)destroy;
-@end
 
 
 

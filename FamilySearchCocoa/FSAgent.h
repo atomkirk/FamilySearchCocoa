@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 FamilySearch.org. All rights reserved.
 //
 
-@class MTPocketResponse, FSPerson;
+@class MTPocketRequest, FSPerson;
 
 typedef NSString * FSUserGender;
 #define FSUserGenderMale    @"MALE"
@@ -44,11 +44,11 @@ extern NSString *const FSUserPermissionAccessDiscussionForums;
 @property (readonly, getter=isLoggedIn) BOOL loggedIn;
 
 - (id)initWithUsername:(NSString *)username password:(NSString *)password developerKey:(NSString *)devKey;
-- (MTPocketResponse *)login;
+- (MTPocketRequest *)login;
 + (FSAgent *)currentUser;            // You have to log in first before this is not nil.
-- (MTPocketResponse *)fetch;
+- (MTPocketRequest *)fetch;
 - (FSPerson *)treePerson;
-- (MTPocketResponse *)logout;
+- (MTPocketRequest *)logout;
 - (BOOL)LDSPermissions;
 
 @end

@@ -13,7 +13,10 @@
 
 
 
-
+@interface FSClient ()
+@property (strong, nonatomic) NSString  *authToken;
+@property (assign, nonatomic) BOOL      sandboxed;
+@end
 
 
 
@@ -21,13 +24,45 @@
 
 @implementation FSClient
 
-static BOOL __sandboxed = YES;
 
-+ (void)setSandboxed:(BOOL)sandboxed
++ (FSClient *)sharedClient
 {
-	__sandboxed = sandboxed;
+    FSClient *client = (FSClient *)[MTPocket sharedPocket];
+    [client registerTemplates];
+    return client;
 }
 
+
+- (void)setSandboxed:(BOOL)sandboxed
+{
+	_sandboxed = sandboxed;
+}
+
+- (void)registerTemplates
+{
+    // base template (includes user agent)
+    MTPocketRequest *baseTemplate = [MTPocketRequest requestTemplate];
+    [baseTemplate.params addEntriesFromDictionary:@{ @"agent" : @"atomkirk-at-gmail-dot-com/1.0" }];
+
+    // template for sending requests to the platform api
+    MTPocketRequest *platformTemplate = [baseTemplate copy];
+    platformTemplate.baseURL = [NSURL URLWithString:@"https://familysearch.org/platform/"];
+    [platformTemplate.headers addEntriesFromDictionary:[MTPocketRequest headerDictionaryForBearerAuthWithToken:_authToken]];
+    [[MTPocket sharedPocket] addRequestTemplate:platformTemplate name:@"platform"];
+
+    // template for sending reqeuests to the ct api
+    MTPocketRequest *ctTemplate = [baseTemplate copy];
+    ctTemplate.baseURL = [NSURL URLWithString:@"https://api.familysearch.org/ct/"];
+    [ctTemplate.params addEntriesFromDictionary:@{ @"sessionid" : _authToken }];
+    [[MTPocket sharedPocket] addRequestTemplate:ctTemplate name:@"ct"];
+
+    // template for sending requests to the reservation service
+    MTPocketRequest *reservationTemplate = [baseTemplate copy];
+    reservationTemplate.baseURL = [NSURL URLWithString:@"https://api.familysearch.org/ct/"];
+    [reservationTemplate.params addEntriesFromDictionary:@{ @"sessionid" : _authToken }];
+    [[MTPocket sharedPocket] addRequestTemplate:reservationTemplate name:@"ct"];
+
+}
 
 
 + (MTPocketRequest *)requestToIdentityResource:(NSString *)resource

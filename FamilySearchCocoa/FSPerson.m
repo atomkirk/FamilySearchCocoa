@@ -37,8 +37,8 @@
 @property (getter = isChanged)	BOOL			changed;	// is newly created or updated and needs to be updated on the server
 @property (getter = isDeleted)	BOOL			deleted;	// has been deleted and needs to be deleted from the server
 + (FSRelationship *)relationshipWithParent:(FSPerson *)parent child:(FSPerson *)child lineage:(FSLineageType)lineage;
-- (MTPocketResponse *)save;
-- (MTPocketResponse *)destroy;
+- (MTPocketRequest *)save;
+- (MTPocketRequest *)destroy;
 @end
 
 
@@ -113,17 +113,17 @@
 	return _identifier != nil;
 }
 
-- (MTPocketResponse *)fetch
+- (MTPocketRequest *)fetch
 {
 	if (!_identifier) raiseException(@"Nil 'identifier'", @"You cannot fetch on a person with a nil identifier." );
 	if ([_identifier isEqualToString:@"me"]) _identifier = nil;
 
-	MTPocketResponse *response = [FSPerson batchFetchPeople:@[ self ]];
+	MTPocketRequest *request = [FSPerson batchFetchPeople:@[ self ]];
 	
 	return response;
 }
 
-- (MTPocketResponse *)save
+- (MTPocketRequest *)save
 {
 	if (!self.name		|| [self.name isEqualToString:@""])		raiseException(@"Nil 'name'", @"You cannot save a person unless they have been given a name");
 	if (!self.gender	|| [self.gender isEqualToString:@""])	raiseException(@"Nil 'gender'", @"You cannot save a person until you set their gender property.");
@@ -217,7 +217,7 @@
 	if (keys.count > 0)		personDict[@"assertions"] = keys;
 
 	NSDictionary *body = @{ @"persons" : @[ personDict ] };
-    MTPocketResponse *response = [MTPocketRequest requestForURL:url method:MTPocketMethodPOST format:MTPocketFormatJSON body:body].send;
+    MTPocketRequest *request = [MTPocketRequest requestForURL:url method:MTPocketMethodPOST format:MTPocketFormatJSON body:body].send;
 
 
 	// if newly created person, assign id and link relationships
@@ -259,7 +259,7 @@
 	return response;
 }
 
-- (MTPocketResponse *)fetchAncestors:(NSUInteger)generations
+- (MTPocketRequest *)fetchAncestors:(NSUInteger)generations
 {
 	if (!_identifier) raiseException(@"Nil identifier", @"You cannot fetch ancestors when the persons 'identifier' is nil");
 
@@ -270,7 +270,7 @@
 							   params:0
 								 misc:[NSString stringWithFormat:@"ancestors=%u&properties=all", generations]];
 	
-    MTPocketResponse *response = [MTPocketRequest requestForURL:url method:MTPocketMethodGET format:MTPocketFormatJSON body:nil].send;
+    MTPocketRequest *request = [MTPocketRequest requestForURL:url method:MTPocketMethodGET format:MTPocketFormatJSON body:nil].send;
 
 	if (response.success) {
 		NSDictionary *pedigree = NILL([response.body valueForComplexKeyPath:@"pedigrees[first]"]);
@@ -309,7 +309,7 @@
 	return response;
 }
 
-+ (MTPocketResponse *)batchFetchPeople:(NSArray *)people
++ (MTPocketRequest *)batchFetchPeople:(NSArray *)people
 {
 	if (people.count == 0) return nil;
 	FSPerson *anyPerson = [people lastObject];
@@ -327,7 +327,7 @@
 							   params:defaultQueryParameters() | familyQueryParameters() | FSQProperties | FSQCharacteristics | FSQOrdinances
 								 misc:nil];
 
-    MTPocketResponse *response = [MTPocketRequest requestForURL:url method:MTPocketMethodGET format:MTPocketFormatJSON body:nil].send;
+    MTPocketRequest *request = [MTPocketRequest requestForURL:url method:MTPocketMethodGET format:MTPocketFormatJSON body:nil].send;
 
 	if (response.success) {
 
@@ -345,7 +345,7 @@
 	return response;
 }
 
-- (MTPocketResponse *)saveSummary
+- (MTPocketRequest *)saveSummary
 {
 	NSMutableDictionary *assertions = [NSMutableDictionary dictionary];
 
@@ -409,7 +409,7 @@
 	if (assertions.count > 0)		personDict[@"assertions"] = assertions;
 
 	NSDictionary *body = @{ @"persons" : @[ personDict ] };
-    MTPocketResponse *response = [MTPocketRequest requestForURL:url method:MTPocketMethodPOST format:MTPocketFormatJSON body:body].send;
+    MTPocketRequest *request = [MTPocketRequest requestForURL:url method:MTPocketMethodPOST format:MTPocketFormatJSON body:body].send;
 
 	return response;
 }
@@ -677,7 +677,7 @@
 
 #pragma mark - Misc
 
-- (NSArray *)duplicatesWithResponse:(MTPocketResponse **)response
+- (NSArray *)duplicatesWithResponse:(MTPocketRequest **)response
 {
 	if (!_identifier) raiseException(@"Nil 'identifier'", @"The persons 'identifier' cannot be nil to find duplicates");
 
@@ -690,7 +690,7 @@
                                params:0
                                  misc:nil];
 
-    MTPocketResponse *resp = *response = [MTPocketRequest requestForURL:url method:MTPocketMethodGET format:MTPocketFormatJSON body:nil].send;
+    MTPocketRequest *resp = *request = [MTPocketRequest requestForURL:url method:MTPocketMethodGET format:MTPocketFormatJSON body:nil].send;
 
 	if (resp.success) {
 		NSDictionary *search = NILL([resp.body valueForComplexKeyPath:@"matches[first]"]);
@@ -745,7 +745,7 @@
 	[self addOrReplaceOrdinance:ordinance];
 }
 
-- (MTPocketResponse *)combineWithPerson:(FSPerson *)person // TODO
+- (MTPocketRequest *)combineWithPerson:(FSPerson *)person // TODO
 {
 	NSURL *url = [FSURL urlWithModule:@"familytree"
                               version:2
@@ -763,7 +763,7 @@
 								}]
 							};
 
-    MTPocketResponse *response = [MTPocketRequest requestForURL:url method:MTPocketMethodPOST format:MTPocketFormatJSON body:body].send;
+    MTPocketRequest *request = [MTPocketRequest requestForURL:url method:MTPocketMethodPOST format:MTPocketFormatJSON body:body].send;
 
 	if (response.success) {
 		NSDictionary *combinedPersonDictionary = NILL([response.body valueForComplexKeyPath:@"persons[first]"]);
@@ -1215,7 +1215,7 @@
 	return [[FSRelationship alloc] initWithParent:parent child:child lineage:lineage];
 }
 
-- (MTPocketResponse *)save
+- (MTPocketRequest *)save
 {
 	if (_deleted) {
 		return [self deleteRelationship];
@@ -1223,7 +1223,7 @@
 	return [self updateRelationship];
 }
 
-- (MTPocketResponse *)destroy
+- (MTPocketRequest *)destroy
 {
 	_deleted = YES;
 	return [self save];
@@ -1231,7 +1231,7 @@
 
 #pragma mark - Private Methods
 
-- (MTPocketResponse *)updateRelationship
+- (MTPocketRequest *)updateRelationship
 {
 	// don't save blank parents or children
 	if (!self.parent.name || [self.parent.name isEqualToString:@""])
@@ -1271,7 +1271,7 @@
 							}]
 						};
 
-    MTPocketResponse *response = [MTPocketRequest requestForURL:url method:MTPocketMethodPOST format:MTPocketFormatJSON body:body].send;
+    MTPocketRequest *request = [MTPocketRequest requestForURL:url method:MTPocketMethodPOST format:MTPocketFormatJSON body:body].send;
 
 	if (response.success) {
 		_changed = NO;
@@ -1281,7 +1281,7 @@
 	return response;
 }
 
-- (MTPocketResponse *)deleteRelationship
+- (MTPocketRequest *)deleteRelationship
 {
 	NSURL *url = [FSURL urlWithModule:@"familytree"
                               version:2
@@ -1290,7 +1290,7 @@
                                params:defaultQueryParameters() | FSQValues | FSQExists | FSQEvents | FSQCharacteristics | FSQOrdinances | FSQContributors
                                  misc:nil];
 
-    MTPocketResponse *response = [MTPocketRequest requestForURL:url method:MTPocketMethodGET format:MTPocketFormatJSON body:nil].send;
+    MTPocketRequest *request = [MTPocketRequest requestForURL:url method:MTPocketMethodGET format:MTPocketFormatJSON body:nil].send;
 
 	if (response.success) {
 		NSMutableDictionary *relationshipTypesToDelete = [NSMutableDictionary dictionary];

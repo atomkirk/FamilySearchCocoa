@@ -33,7 +33,7 @@
 	_person = [FSPerson personWithIdentifier:nil];
 	_person.name = @"Adam Kirk";
 	_person.gender = @"Male";
-	MTPocketResponse *response = [_person save];
+	MTPocketRequest *request = [_person save];
 	STAssertTrue(response.success, nil);
 }
 
@@ -49,7 +49,7 @@
 
 - (void)testCurrentUserFetch
 {
-	MTPocketResponse *response = nil;
+	MTPocketRequest *request = nil;
 
 	@try {
 		FSPerson *p = [FSPerson personWithIdentifier:nil];
@@ -73,7 +73,7 @@
 
 - (void)testPersonFetch
 {
-	MTPocketResponse *response = [_person fetch];
+	MTPocketRequest *request = [_person fetch];
 	STAssertTrue(response.success, nil);
 	STAssertNotNil(_person.identifier, nil);
 	STAssertTrue([_person.name isEqualToString:@"Adam Kirk"], nil);
@@ -82,7 +82,7 @@
 
 - (void)testFetchAncestors
 {
-	MTPocketResponse *response;
+	MTPocketRequest *response;
 
 	// create and add the father
 	FSPerson *father = [FSPerson personWithIdentifier:nil];
@@ -112,7 +112,7 @@
 
 //- (void)testCombineWithPerson
 //{
-//	MTPocketResponse *response;
+//	MTPocketRequest *response;
 //
 //	FSPerson *p1 = [FSPerson personWithIdentifier:nil];
 //	p1.name = @"Adam Taylor";
@@ -128,7 +128,7 @@
 
 - (void)testBatchFetchPeople
 {
-	MTPocketResponse *response;
+	MTPocketRequest *response;
 
 	FSPerson *p1 = [FSPerson personWithIdentifier:nil];
 	p1.name = @"Adam Taylor";
@@ -162,7 +162,7 @@
 
 - (void)testSaveSummary
 {
-	MTPocketResponse *response = nil;
+	MTPocketRequest *request = nil;
 
 	// Snuff 'em
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -212,7 +212,7 @@
 
 - (void)testOnSyncCallback
 {
-	MTPocketResponse *response = nil;
+	MTPocketRequest *request = nil;
 
 	__block BOOL onSyncWasCalled = NO;
 	__block FSPersonSyncResult onSyncStatus = FSPersonSyncResultNone;
@@ -229,7 +229,7 @@
 
 - (void)testAddCharacteristicsToPerson
 {
-	MTPocketResponse *response;
+	MTPocketRequest *response;
 
 	// add the properties
 	[_person setCharacteristic:@"Kirk" forKey:FSCharacteristicTypeCasteName];
@@ -247,7 +247,7 @@
 
 - (void)testAddAndRemoveFather
 {
-	MTPocketResponse *response;
+	MTPocketRequest *response;
 
 	// create and add the father
 	FSPerson *father = [FSPerson personWithIdentifier:nil];
@@ -277,7 +277,7 @@
 
 - (void)testAddAndRemoveMother
 {
-	MTPocketResponse *response;
+	MTPocketRequest *response;
 
 	// create and add the mother
 	FSPerson *mother = [FSPerson personWithIdentifier:nil];
@@ -309,7 +309,7 @@
 
 - (void)testAddMotherAndFather
 {
-	MTPocketResponse *response;
+	MTPocketRequest *response;
 
 	// create and add the father
 	FSPerson *father = [FSPerson personWithIdentifier:nil];
@@ -341,7 +341,7 @@
 
 - (void)testDoesntSaveBlankParents
 {
-	MTPocketResponse *response = nil;
+	MTPocketRequest *request = nil;
 
 	NSArray *bothParents = [_person motherAndFather];
 	STAssertTrue(bothParents.count == 2, nil);
@@ -359,7 +359,7 @@
 
 - (void)testAddAndRemoveChild
 {
-	MTPocketResponse *response;
+	MTPocketRequest *response;
 
 	// create and add the child
 	FSPerson *child = [FSPerson personWithIdentifier:nil];
@@ -390,7 +390,7 @@
 
 - (void)testAddAndRemoveSpouse
 {
-	MTPocketResponse *response;
+	MTPocketRequest *response;
 
 	// create and add the spouse
 	FSPerson *spouse = [FSPerson personWithIdentifier:nil];
@@ -421,7 +421,7 @@
 
 - (void)testDuplicates
 {
-	MTPocketResponse *response;
+	MTPocketRequest *response;
 
 	// create person to match
 	FSPerson *person = [FSPerson personWithIdentifier:nil];

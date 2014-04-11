@@ -50,7 +50,7 @@
 
 #pragma mark - Getting Ordinances
 
-+ (MTPocketResponse *)fetchOrdinancesForPeople:(NSArray *)people
++ (MTPocketRequest *)fetchOrdinancesForPeople:(NSArray *)people
 {
 	if (people.count == 0) return nil;
 
@@ -59,7 +59,7 @@
 		if (person.identifier) [identifiers addObject:person.identifier];
 	}
 
-    MTPocketResponse *response = [[FSClient requestToReservationResource:@"person" identifiers:identifiers method:MTPocketMethodGET body:nil params:nil] send];
+    MTPocketRequest *request = [[FSClient requestToReservationResource:@"person" identifiers:identifiers method:MTPocketMethodGET body:nil params:nil] send];
 
 	if (response.success) {
 
@@ -153,9 +153,9 @@
 	return response;
 }
 
-+ (NSArray *)peopleReservedByCurrentUserWithResponse:(MTPocketResponse **)response
++ (NSArray *)peopleReservedByCurrentUserWithResponse:(MTPocketRequest **)response
 {
-    MTPocketResponse *resp = [[FSClient requestToReservationResource:@"person" identifiers:nil method:MTPocketMethodGET body:nil params:nil] send];
+    MTPocketRequest *resp = [[FSClient requestToReservationResource:@"person" identifiers:nil method:MTPocketMethodGET body:nil params:nil] send];
 
     NSMutableArray *people = [NSMutableArray array];
 	if (resp.success) {
@@ -167,7 +167,7 @@
 		}
 	}
 
-    *response = resp;
+    *request = resp;
 
     return people;
 }
@@ -177,7 +177,7 @@
 
 #pragma mark - Reserving
 
-+ (MTPocketResponse *)reserveOrdinances:(NSArray *)ordinances forPeople:(NSArray *)people inventory:(FSOrdinanceInventoryType)inventory
++ (MTPocketRequest *)reserveOrdinances:(NSArray *)ordinances forPeople:(NSArray *)people inventory:(FSOrdinanceInventoryType)inventory
 {
 	if (people.count == 0) raiseParamException(@"people");
 
@@ -277,12 +277,12 @@
 	
 	NSDictionary *body = @{ @"persons" : @{ @"person" : personDictionaries } };
 
-    MTPocketResponse *response = [[FSClient requestToReservationResource:@"person" identifiers:nil method:MTPocketMethodPOST body:body params:nil] send];
+    MTPocketRequest *request = [[FSClient requestToReservationResource:@"person" identifiers:nil method:MTPocketMethodPOST body:body params:nil] send];
 
 	return response;
 }
 
-+ (MTPocketResponse *)unreserveOrdinances:(NSArray *)ordinances forPeople:(NSArray *)people
++ (MTPocketRequest *)unreserveOrdinances:(NSArray *)ordinances forPeople:(NSArray *)people
 {
 	if (people.count == 0) raiseParamException(@"people");
 
@@ -297,7 +297,7 @@
 	
 	NSDictionary *body = @{ @"persons" : @{ @"person" : personDictionaries } };
 
-    MTPocketResponse *response = [[FSClient requestToReservationResource:@"person" identifiers:nil method:MTPocketMethodPOST body:body params:@{@"owner" : @"me"}] send];
+    MTPocketRequest *request = [[FSClient requestToReservationResource:@"person" identifiers:nil method:MTPocketMethodPOST body:body params:@{@"owner" : @"me"}] send];
 
 	return response;
 }
@@ -307,13 +307,13 @@
 
 #pragma mark - Printing Ordinance Requests
 
-+ (NSURL *)familyOrdinanceRequestPDFURLForPeople:(NSArray *)people response:(MTPocketResponse **)response
++ (NSURL *)familyOrdinanceRequestPDFURLForPeople:(NSArray *)people response:(MTPocketRequest **)response
 {
 	if (people.count == 0) raiseParamException(@"people");
 
     NSURL *PDFURL = nil;
 
-    MTPocketResponse *resp = *response = [FSOrdinance fetchOrdinancesForPeople:people];
+    MTPocketRequest *resp = *request = [FSOrdinance fetchOrdinancesForPeople:people];
 
 	if (resp.success) {
 
@@ -369,7 +369,7 @@
 								}
 							};
 
-        resp = *response = [[FSClient requestToReservationResource:@"trip" identifiers:nil method:MTPocketMethodPOST body:body params:nil] send];
+        resp = *request = [[FSClient requestToReservationResource:@"trip" identifiers:nil method:MTPocketMethodPOST body:body params:nil] send];
 
 		if (resp.success) {
 			NSString *identifier = NILL([resp.body valueForComplexKeyPath:@"trips.trip[first].id"]);
@@ -385,7 +385,7 @@
 	return PDFURL;
 }
 
-+ (NSURL *)urlOfChurchPoliciesResponse:(MTPocketResponse **)response
++ (NSURL *)urlOfChurchPoliciesResponse:(MTPocketRequest **)response
 {
 	return nil; // TODO
 }

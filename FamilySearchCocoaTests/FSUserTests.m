@@ -20,7 +20,7 @@
 	[FSURL setSandboxed:YES];
 	
 	FSAgent *user = [[FSAgent alloc] initWithUsername:SANDBOXED_USERNAME password:SANDBOXED_PASSWORD developerKey:SANDBOXED_DEV_KEY];
-	MTPocketResponse *response = [user login];
+	MTPocketRequest *request = [user login];
 
 	STAssertNotNil(response.body, @"sessionID was nil");
 }
@@ -28,7 +28,7 @@
 - (void)testLogout
 {
 	FSAgent *user = [[FSAgent alloc] initWithUsername:SANDBOXED_USERNAME password:SANDBOXED_PASSWORD developerKey:SANDBOXED_DEV_KEY];
-	MTPocketResponse *response = [user login];
+	MTPocketRequest *request = [user login];
     STAssertTrue(response.success, nil);
 
     response = [user logout];
@@ -38,7 +38,7 @@
 - (void)testFetch
 {
     FSAgent *user = [[FSAgent alloc] initWithUsername:SANDBOXED_USERNAME password:SANDBOXED_PASSWORD developerKey:SANDBOXED_DEV_KEY];
-    MTPocketResponse *response = [user login];
+    MTPocketRequest *request = [user login];
     STAssertTrue(response.success, nil);
 
     response = [user fetch];

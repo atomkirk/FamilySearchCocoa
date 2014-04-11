@@ -12,7 +12,6 @@ Pod::Spec.new do |s|
   s.source       = { :git => "https://github.com/FamilySearch/FamilySearchCocoa.git", :tag => "0.10.1" }
   s.source_files = 'FamilySearchCocoa/*.{h,m}'
   s.requires_arc = true
-  s.dependency 'MTPocket'
-  s.dependency 'MTDates'
-  s.dependency 'MTJSONUtils'
+  s.dependency 'MTPocket',  '2.0.0'
+  s.dependency 'MTDates',   '0.12.0'
 end

@@ -11,11 +11,15 @@
 //#define FSMediaTypeXML          @"application/x-fs-v1+xml"
 //#define FSMediaTypeJSON         @"application/x-fs-v1+json"
 
+#import <MTPocket.h>
 
 
-@interface FSClient : NSObject
 
-+ (void)setSandboxed:(BOOL)sandboxed;
+@interface FSClient : MTPocket
+
++ (FSClient *)sharedClient;
+- (void)setSandboxed:(BOOL)sandboxed;
+- (void)registerTemplates;
 
 + (MTPocketRequest *)requestToIdentityResource:(NSString *)resource                                         method:(MTPocketMethod)method   body:(id)body   params:(NSDictionary *)params;
 + (MTPocketRequest *)requestToConclusionResource:(NSString *)resource   identifiers:(NSArray *)identifiers  method:(MTPocketMethod)method   body:(id)body   params:(NSDictionary *)params;

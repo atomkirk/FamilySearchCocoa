@@ -8,7 +8,6 @@
 
 #import "FSAgent.h"
 #import "private.h"
-#import <NSObject+MTJSONUtils.h>
 
 
 
@@ -47,20 +46,21 @@ static FSAgent *__currentUser = nil;
     return self;
 }
 
-- (MTPocketResponse *)login
+- (MTPocketRequest *)login
 {
     _treePerson = nil;
     _sessionID = nil;
 
-    MTPocketResponse *response = [[FSClient requestToIdentityResource:@"login" method:MTPocketMethodGET body:nil params:@{@"key" : _devKey}] send];
+    MTPocketRequest *request = [FSClient requestToIdentityResource:@"login" method:MTPocketMethodGET body:nil params:@{@"key" : _devKey}];
 
-	if (response.success) {
+    [request addSuccess:^(MTPocketResponse *response) {
         _loggedIn       = YES;
         __currentUser   = self;
-		_sessionID      = NILL([response.body valueForKeyPath:@"session.id"]);
-	}
+        _sessionID      = NILL([response.body valueForKeyPath:@"session.id"]);
 
-	return response;
+    }];
+
+	return request;
 }
 
 - (FSPerson *)treePerson
@@ -69,14 +69,14 @@ static FSAgent *__currentUser = nil;
     return _treePerson;
 }
 
-- (MTPocketResponse *)fetch
+- (MTPocketRequest *)fetch
 {
     NSString *URLString = [NSString stringWithFormat:@"https://ident.familysearch.org/cis-public-api/v4/user?sessionId=%@", _sessionID];
 	NSURL *url = [NSURL URLWithString:URLString];
 
-    MTPocketResponse *response = [[MTPocketRequest requestForURL:url method:MTPocketMethodGET format:MTPocketFormatJSON body:nil] send];
+    MTPocketRequest *request = [MTPocketRequest requestWithURL:<#(NSURL *)#> method:<#(MTPocketMethod)#> body:<#(id)#> requestForURL:url method:MTPocketMethodGET format:MTPocketFormatJSON body:nil];
 
-	if (response.success) {
+    [request addSuccess:^(MTPocketRequest *response) {
         NSDictionary *userDict  = [response.body[@"users"] lastObject];
         _displayName            = NILL(userDict[@"displayName"]);
         _email                  = NILL(userDict[@"email"]);
@@ -90,12 +90,13 @@ static FSAgent *__currentUser = nil;
         _membershipNumber       = NILL(userDict[@"membershipNumber"]);
         _preferredLanguage      = NILL(userDict[@"preferredLanguage"]);
         _ward                   = NILL(userDict[@"ward"]);
-	}
-    else return response;
+    }];
 
-    response = [[FSClient requestToIdentityResource:@"permission" method:MTPocketMethodGET body:nil params:@{@"product" : @"FamilyTree"}] send];
+    else return request;
 
-	if (response.success) {
+    request = [FSClient requestToIdentityResource:@"permission" method:MTPocketMethodGET body:nil params:@{@"product" : @"FamilyTree"}];
+
+    [request addSuccess:^(MTPocketRequest *response) {
         NSArray *permissions = response.body[@"permissions"];
         NSMutableDictionary *permissionsDict = [NSMutableDictionary dictionary];
         permissionsDict[FSUserPermissionAccess]                 = @NO;
@@ -109,14 +110,14 @@ static FSAgent *__currentUser = nil;
             permissionsDict[permission[@"value"]] = @YES;
         }
         _permissions = [NSDictionary dictionaryWithDictionary:permissionsDict];
-    }
+    }];
 
-	return response;
+	return request;
 }
 
-- (MTPocketResponse *)logout
+- (MTPocketRequest *)logout
 {
-    MTPocketResponse *response = [[FSClient requestToIdentityResource:@"logout" method:MTPocketMethodGET body:nil params:nil] send];
+    MTPocketRequest *request = [[FSClient requestToIdentityResource:@"logout" method:MTPocketMethodGET body:nil params:nil] send];
 
     if (response.success) {
         _loggedIn           = NO;

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>0296FA4A-9B14-4123-8456-A79691F057FE</string>
+	<key>IDESourceControlProjectName</key>
+	<string>FamilySearchCocoa</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>4D648EF7-21D4-410B-9129-7021C0107479</key>
+		<string>https://github.com/atomkirk/FamilySearchCocoa.git</string>
+		<key>A0D8D48F-E9CB-416E-B454-69112ADA6614</key>
+		<string>https://github.com/mysterioustrousers/MTPocket.git</string>
+		<key>FC17AF42-09FE-4223-A7EA-51BA5D34CB12</key>
+		<string>https://github.com/mysterioustrousers/MTDates.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>FamilySearchCocoa.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>4D648EF7-21D4-410B-9129-7021C0107479</key>
+		<string>..</string>
+		<key>A0D8D48F-E9CB-416E-B454-69112ADA6614</key>
+		<string>../libs/MTPocket</string>
+		<key>FC17AF42-09FE-4223-A7EA-51BA5D34CB12</key>
+		<string>../libs/MTDates</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/atomkirk/FamilySearchCocoa.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>4D648EF7-21D4-410B-9129-7021C0107479</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>4D648EF7-21D4-410B-9129-7021C0107479</string>
+			<key>IDESourceControlWCCName</key>
+			<string>familysearchcocoa</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>FC17AF42-09FE-4223-A7EA-51BA5D34CB12</string>
+			<key>IDESourceControlWCCName</key>
+			<string>MTDates</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>A0D8D48F-E9CB-416E-B454-69112ADA6614</string>
+			<key>IDESourceControlWCCName</key>
+			<string>MTPocket</string>
+		</dict>
+	</array>
+</dict>
+</plist>

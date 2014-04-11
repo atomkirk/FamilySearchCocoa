@@ -27,9 +27,9 @@
 @property (strong, nonatomic)	NSMutableArray	*backingStore;
 @property (strong, nonatomic)	FSURL			*url;
 @property (strong, nonatomic)	NSString		*contextID;
-@property (nonatomic)			NSUInteger		currentIndex;
-@property (nonatomic)			NSUInteger		batchSize;
-@property (nonatomic)			NSMutableArray	*criteria;
+@property (        nonatomic)	NSUInteger		currentIndex;
+@property (        nonatomic)	NSUInteger		batchSize;
+@property (        nonatomic)   NSMutableArray	*criteria;
 @end
 
 
@@ -137,7 +137,7 @@
     return self;
 }
 
-- (MTPocketResponse *)next
+- (MTPocketRequest *)next
 {
 	NSMutableArray *params = [NSMutableArray array];
 	[params addObject:[NSString stringWithFormat:@"maxResults=%u", _batchSize]];
@@ -166,7 +166,7 @@
                                params:0
                                  misc:[params componentsJoinedByString:@"&"]];
 
-    MTPocketResponse *response = [MTPocketRequest requestForURL:url method:MTPocketMethodGET format:MTPocketFormatJSON body:nil].send;
+    MTPocketRequest *request = [MTPocketRequest requestForURL:url method:MTPocketMethodGET format:MTPocketFormatJSON body:nil].send;
 
 
 	if (response.success) {

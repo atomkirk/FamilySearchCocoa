@@ -74,18 +74,18 @@ typedef enum {
 
 
 #pragma mark - Getting Ordinances
-+ (MTPocketResponse *)fetchOrdinancesForPeople:(NSArray *)people;				// Populates the 'ordinances' properties on the passed in people.
++ (MTPocketRequest *)fetchOrdinancesForPeople:(NSArray *)people;				// Populates the 'ordinances' properties on the passed in people.
 
 
 #pragma mark - Reserving Ordinances
-+ (MTPocketResponse *)reserveOrdinances:(NSArray *)ordinances forPeople:(NSArray *)people inventory:(FSOrdinanceInventoryType)inventory;
-+ (MTPocketResponse *)unreserveOrdinances:(NSArray *)ordinances forPeople:(NSArray *)people;
-+ (NSArray *)peopleReservedByCurrentUserWithResponse:(MTPocketResponse **)response;	// All the people this current user has reserved ordinances for.
++ (MTPocketRequest *)reserveOrdinances:(NSArray *)ordinances forPeople:(NSArray *)people inventory:(FSOrdinanceInventoryType)inventory;
++ (MTPocketRequest *)unreserveOrdinances:(NSArray *)ordinances forPeople:(NSArray *)people;
++ (MTPocketRequest *)peopleReservedByCurrentAgent;                              // All the people this current user has reserved ordinances for.
 
 
 #pragma mark - Printing Ordinance Requests
-+ (NSURL *)familyOrdinanceRequestPDFURLForPeople:(NSArray *)people response:(MTPocketResponse **)response;
-+ (NSURL *)urlOfChurchPoliciesResponse:(MTPocketResponse **)response;
++ (MTPocketRequest *)familyOrdinanceRequestPDFURLForPeople:(NSArray *)people;
++ (MTPocketRequest *)urlOfChurchPolicies;
 
 
 #pragma mark - Keys

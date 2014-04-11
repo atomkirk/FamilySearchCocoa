@@ -61,7 +61,7 @@ typedef NSString * FSSearchCriteria;
 
 @property (readonly) NSUInteger numberOfResults;
 
-- (MTPocketResponse *)next;							// Returns the next set of paginated results
+- (MTPocketRequest *)next;							// Returns the next set of paginated results
 
 @end
 

@@ -1,1 +1,0 @@
-../../MTPocket/MTPocket/private.h

@@ -32,13 +32,13 @@
 	[user login];
 
 	_person = [FSPerson personWithIdentifier:PRODUCTION_PERSON_ID];
-    MTPocketResponse *response = [_person fetch];
+    MTPocketRequest *request = [_person fetch];
     STAssertTrue(response.success, nil);
 }
 
 - (void)testArtifacts
 {
-	MTPocketResponse *response = nil;
+	MTPocketRequest *request = nil;
 
 	NSBundle *bundle = [NSBundle bundleForClass:[self class]];
 	NSString *imagePath = [bundle pathForResource:@"arthur-young" ofType:@"jpg"];
@@ -101,7 +101,7 @@
 
 - (void)testTagging
 {
-	MTPocketResponse *response = nil;
+	MTPocketRequest *request = nil;
 
 	NSBundle *bundle = [NSBundle bundleForClass:[self class]];
 	NSString *imagePath = [bundle pathForResource:@"arthur-young" ofType:@"jpg"];
@@ -145,7 +145,7 @@
 
 - (void)testPortraitArtifacts
 {
-    MTPocketResponse *response = nil;
+    MTPocketRequest *request = nil;
 
    	NSBundle *bundle = [NSBundle bundleForClass:[self class]];
 	NSString *imagePath = [bundle pathForResource:@"arthur-young" ofType:@"jpg"];
@@ -176,7 +176,7 @@
 
 - (void)testFetchUsersArtifacts
 {
-    MTPocketResponse *response = nil;
+    MTPocketRequest *request = nil;
 
     NSBundle *bundle = [NSBundle bundleForClass:[self class]];
 	NSString *imagePath = [bundle pathForResource:@"arthur-young" ofType:@"jpg"];
@@ -200,7 +200,7 @@
 //- (void)test
 //{
 //    NSURL *url = [NSURL URLWithString:@"https://api.familysearch.org/artifactmanager/users/unknown/taggedPersons?maxRecords=50&sessionId=USYS2AEBA31662BF5B6AF91E0D53F89907DB_ses002.app.prod.id.fsglobal.net&agent=akirk-at-familysearch-dot-org/1.0"];
-//    MTPocketResponse *response = [MTPocketRequest objectAtURL:url method:MTPocketMethodGET format:MTPocketFormatJSON body:nil];
+//    MTPocketRequest *request = [MTPocketRequest objectAtURL:url method:MTPocketMethodGET format:MTPocketFormatJSON body:nil];
 //    if (response.success) {
 //        for (NSDictionary *taggedPerson in response.body[@"taggedPerson"]) {
 //            NSString *identifier = taggedPerson[@"id"];

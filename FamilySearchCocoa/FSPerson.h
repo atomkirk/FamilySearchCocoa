@@ -8,7 +8,7 @@
 
 /*
  
- NOTE: Any methods of any class returning an MTPocketResponse
+ NOTE: Any methods of any class returning an MTPocketRequest
  object is a blocking, synchronous call so you should call it
  on another thread. All others are non-blocking.
 
@@ -109,9 +109,9 @@ typedef enum {
 
 
 #pragma mark - Syncing
-- (MTPocketResponse *)fetch;									// If called when identifier is (not nil => reset w server info)	| (nil => throws an exception)
-- (MTPocketResponse *)save;										// If called when identifier is (not nil => update person)			| (nil => create new person)
-- (MTPocketResponse *)fetchAncestors:(NSUInteger)generations;
+- (MTPocketRequest *)fetch;									// If called when identifier is (not nil => reset w server info)	| (nil => throws an exception)
+- (MTPocketRequest *)save;										// If called when identifier is (not nil => update person)			| (nil => create new person)
+- (MTPocketRequest *)fetchAncestors:(NSUInteger)generations;
 
 
 #pragma mark - Characteristics
@@ -137,7 +137,7 @@ typedef enum {
 
 
 #pragma mark - Misc
-- (NSArray *)duplicatesWithResponse:(MTPocketResponse **)response;		// returns possible duplicates of this person (to potentially be merged)
+- (NSArray *)duplicatesWithResponse:(MTPocketRequest **)response;		// returns possible duplicates of this person (to potentially be merged)
 - (void)addUnofficialOrdinanceWithType:(FSOrdinanceType)type date:(NSDate *)date templeCode:(NSString *)templeCode;
 - (NSArray *)loggedValuesForPropertyType:(FSPropertyType)type;
 

@@ -30,7 +30,7 @@
 	_person = [FSPerson personWithIdentifier:nil];
 	_person.name = @"Adam Kirk";
 	_person.gender = @"Male";
-	MTPocketResponse *response = [_person save];
+	MTPocketRequest *request = [_person save];
 	STAssertTrue(response.success, nil);
 }
 

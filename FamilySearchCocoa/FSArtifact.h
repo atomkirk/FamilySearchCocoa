@@ -53,7 +53,7 @@ extern NSString *const FSArtifactThumbnailStyleSquareKey;
 @property (readonly, nonatomic)	NSString	*title;
 @property (readonly, nonatomic) CGRect		rect;       // These are percentage values not pixels
 + (FSArtifactTag *)tagWithPerson:(FSPerson *)person title:(NSString *)title rect:(CGRect)rect;
-- (FSArtifact *)artifactFromSavingTagAsPortraitWithResponse:(MTPocketResponse **)response;         // this call blocks, do not call on main thread
+- (FSArtifact *)artifactFromSavingTagAsPortraitWithResponse:(MTPocketRequest **)response;         // this call blocks, do not call on main thread
 @end
 
 
@@ -82,15 +82,15 @@ extern NSString *const FSArtifactThumbnailStyleSquareKey;
 #pragma mark - Creating Artifacts
 + (FSArtifact *)artifactWithData:(NSData *)data MIMEType:(FSArtifactMIMEType)MIMEType;                                              // For creating and uploading a new artifact
 + (FSArtifact *)artifactWithIdentifier:(NSString *)identifier;                                                                      // For fetching an existing artifact
-+ (NSArray *)artifactsForPerson:(FSPerson *)person category:(FSArtifactCategory)category response:(MTPocketResponse **)response;    // This will block, do not call on main thread.
-+ (FSArtifact *)portraitArtifactForPerson:(FSPerson *)person response:(MTPocketResponse **)response;                                // This will block, do not call on main thread.
-+ (NSArray *)artifactsUploadedByCurrentUserWithResponse:(MTPocketResponse **)response;              // This will block, do not call on main thread.
++ (NSArray *)artifactsForPerson:(FSPerson *)person category:(FSArtifactCategory)category response:(MTPocketRequest **)response;    // This will block, do not call on main thread.
++ (FSArtifact *)portraitArtifactForPerson:(FSPerson *)person response:(MTPocketRequest **)response;                                // This will block, do not call on main thread.
++ (NSArray *)artifactsUploadedByCurrentUserWithResponse:(MTPocketRequest **)response;              // This will block, do not call on main thread.
 
 
 #pragma mark - Syncing
-- (MTPocketResponse *)save;
-- (MTPocketResponse *)fetch;
-- (MTPocketResponse *)destroy;
+- (MTPocketRequest *)save;
+- (MTPocketRequest *)fetch;
+- (MTPocketRequest *)destroy;
 
 #pragma mark - Tagging
 - (NSArray *)tags;

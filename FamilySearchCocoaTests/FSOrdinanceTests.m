@@ -35,13 +35,13 @@
 	_person = [FSPerson personWithIdentifier:nil];
 	_person.name = @"Adam Kirk";
 	_person.gender = @"Male";
-	MTPocketResponse *response = [_person save];
+	MTPocketRequest *request = [_person save];
 	STAssertTrue(response.success, nil);
 }
 
 - (void)tearDown
 {
-    MTPocketResponse *response = nil;
+    MTPocketRequest *request = nil;
     NSArray *people = [FSOrdinance peopleReservedByCurrentUserWithResponse:&response];
 	STAssertTrue(response.success, nil);
 
@@ -53,7 +53,7 @@
 
 - (void)testFetchGetsOrdinances
 {
-	MTPocketResponse *response = nil;
+	MTPocketRequest *request = nil;
 
 	FSPerson *father = [FSPerson personWithIdentifier:nil];
 	father.name = @"Nathan Kirk";
@@ -75,7 +75,7 @@
 
 - (void)testFetchingAllOrdinances
 {
-	MTPocketResponse *response = nil;
+	MTPocketRequest *request = nil;
 
 	FSPerson *father = [FSPerson personWithIdentifier:nil];
 	father.name			= @"Nathan Kirk";
@@ -98,7 +98,7 @@
 
 - (void)testReserveAndUnreserveOrdinances
 {
-	MTPocketResponse *response = nil;
+	MTPocketRequest *request = nil;
 
 	FSPerson *father    = [FSPerson personWithIdentifier:nil];
 	father.name			= @"Nathan Kirk";
@@ -160,7 +160,7 @@
 
 - (void)testFetchListOfReservedPeopleByCurrentUser
 {
-	MTPocketResponse *response = nil;
+	MTPocketRequest *request = nil;
 
     FSPerson *father    = [FSPerson personWithIdentifier:nil];
 	father.name			= @"Nathan Kirk";
@@ -188,7 +188,7 @@
 
 - (void)testFetchFamilyOrdinanceRequestPDFURL
 {
-	MTPocketResponse *response = nil;
+	MTPocketRequest *request = nil;
 
     FSPerson *father    = [FSPerson personWithIdentifier:nil];
 	father.name			= @"Nathan Kirk";
